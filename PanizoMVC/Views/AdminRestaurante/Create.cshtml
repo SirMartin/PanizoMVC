@@ -1,0 +1,82 @@
+﻿@model PanizoMVC.Restaurante
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Restaurante</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdCiudad)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdCiudad)
+            @Html.ValidationMessageFor(model => model.IdCiudad)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Direccion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Direccion)
+            @Html.ValidationMessageFor(model => model.Direccion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CP)
+            @Html.ValidationMessageFor(model => model.CP)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Telefono)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telefono)
+            @Html.ValidationMessageFor(model => model.Telefono)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descripcion)
+            @Html.ValidationMessageFor(model => model.Descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FechaCreacion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FechaCreacion)
+            @Html.ValidationMessageFor(model => model.FechaCreacion)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

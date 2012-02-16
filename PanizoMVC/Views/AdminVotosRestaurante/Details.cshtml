@@ -1,0 +1,41 @@
+﻿@model PanizoMVC.VotosRestaurante
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>VotosRestaurante</legend>
+
+    <div class="display-label">IdUsuario</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdUsuario)
+    </div>
+
+    <div class="display-label">IdRestaurante</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdRestaurante)
+    </div>
+
+    <div class="display-label">Voto</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Voto)
+    </div>
+
+    <div class="display-label">Comentario</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comentario)
+    </div>
+
+    <div class="display-label">FechaCreacion</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FechaCreacion)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
