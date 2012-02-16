@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Details</h2>
@@ -10,14 +10,14 @@
 <fieldset>
     <legend>VotosRestaurante</legend>
 
-    <div class="display-label">IdUsuario</div>
+    <div class="display-label">Usuario</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdUsuario)
+        @Html.DisplayFor(model => model.Usuario.Email)
     </div>
 
-    <div class="display-label">IdRestaurante</div>
+    <div class="display-label">Restaurante</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdRestaurante)
+        @Html.DisplayFor(model => model.Restaurante.Nombre)
     </div>
 
     <div class="display-label">Voto</div>

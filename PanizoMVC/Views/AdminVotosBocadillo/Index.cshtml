@@ -1,9 +1,8 @@
-﻿
-@model IEnumerable<PanizoMVC.VotosBocadillo>
+﻿@model IEnumerable<PanizoMVC.VotosBocadillo>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Index</h2>
@@ -14,10 +13,10 @@
 <table>
     <tr>
         <th>
-            IdUsuario
+            Usuario
         </th>
         <th>
-            IdBocadillo
+            Bocadillo
         </th>
         <th>
             Voto
@@ -34,10 +33,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IdUsuario)
+            @Html.DisplayFor(modelItem => item.Usuario.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IdBocadillo)
+            @Html.DisplayFor(modelItem => item.Bocadillo.Nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Voto)

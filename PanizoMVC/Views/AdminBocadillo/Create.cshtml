@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Create</h2>
@@ -16,10 +16,10 @@
         <legend>Bocadillo</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdRestaurante)
+            @Html.LabelFor(model => model.IdRestaurante, "Restaurante")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.IdRestaurante)
+            @Html.DropDownList("IdRestaurante", String.Empty)
             @Html.ValidationMessageFor(model => model.IdRestaurante)
         </div>
 

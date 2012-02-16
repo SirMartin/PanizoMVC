@@ -9,7 +9,7 @@ using PanizoMVC.Models;
 
 namespace PanizoMVC.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
 
         //

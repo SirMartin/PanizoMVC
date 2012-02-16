@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>Delete</h2>
@@ -11,14 +11,14 @@
 <fieldset>
     <legend>VotosBocadillo</legend>
 
-    <div class="display-label">IdUsuario</div>
+    <div class="display-label">Usuario</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdUsuario)
+        @Html.DisplayFor(model => model.Usuario.Email)
     </div>
 
-    <div class="display-label">IdBocadillo</div>
+    <div class="display-label">Bocadillo</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IdBocadillo)
+        @Html.DisplayFor(model => model.Bocadillo.Nombre)
     </div>
 
     <div class="display-label">Voto</div>
