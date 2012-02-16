@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_37268_panizoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DB_37268_panizoModelStoreContainer">
+          <EntitySet Name="Bocadillo" EntityType="DB_37268_panizoModel.Store.Bocadillo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BocadilloIngrediente" EntityType="DB_37268_panizoModel.Store.BocadilloIngrediente" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ciudad" EntityType="DB_37268_panizoModel.Store.Ciudad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ingrediente" EntityType="DB_37268_panizoModel.Store.Ingrediente" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Restaurante" EntityType="DB_37268_panizoModel.Store.Restaurante" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Usuario" EntityType="DB_37268_panizoModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VotosBocadillo" EntityType="DB_37268_panizoModel.Store.VotosBocadillo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VotosRestaurante" EntityType="DB_37268_panizoModel.Store.VotosRestaurante" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Bocadillo_Restaurante" Association="DB_37268_panizoModel.Store.FK_Bocadillo_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="Bocadillo" EntitySet="Bocadillo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Bocadillo" Association="DB_37268_panizoModel.Store.FK_BocadilloIngrediente_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillo" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Ingrediente" Association="DB_37268_panizoModel.Store.FK_BocadilloIngrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Usuario" Association="DB_37268_panizoModel.Store.FK_BocadilloIngrediente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingrediente_Usuario" Association="DB_37268_panizoModel.Store.FK_Ingrediente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurante_Ciudad" Association="DB_37268_panizoModel.Store.FK_Restaurante_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Restaurante" EntitySet="Restaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosBocadillo_Bocadillo" Association="DB_37268_panizoModel.Store.FK_VotosBocadillo_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillo" />
+            <End Role="VotosBocadillo" EntitySet="VotosBocadillo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosBocadillo_Usuario" Association="DB_37268_panizoModel.Store.FK_VotosBocadillo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VotosBocadillo" EntitySet="VotosBocadillo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosRestaurante_Restaurante" Association="DB_37268_panizoModel.Store.FK_VotosRestaurante_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="VotosRestaurante" EntitySet="VotosRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosRestaurante_Usuario" Association="DB_37268_panizoModel.Store.FK_VotosRestaurante_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="VotosRestaurante" EntitySet="VotosRestaurante" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bocadillo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BocadilloIngrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdBocadillo" Type="int" Nullable="false" />
+          <Property Name="IdIngrediente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="350" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdCiudad" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Direccion" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="CP" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="Telefono" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Nick" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotosBocadillo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdBocadillo" Type="int" Nullable="false" />
+          <Property Name="Voto" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="500" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VotosRestaurante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="Voto" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bocadillo_Restaurante">
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Store.Restaurante" Multiplicity="1" />
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Store.Bocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bocadillo">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Bocadillo">
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Store.Bocadillo" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.Store.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Ingrediente">
+          <End Role="Ingrediente" Type="DB_37268_panizoModel.Store.Ingrediente" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.Store.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdIngrediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Store.Usuario" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.Store.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingrediente_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Store.Usuario" Multiplicity="1" />
+          <End Role="Ingrediente" Type="DB_37268_panizoModel.Store.Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingrediente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurante_Ciudad">
+          <End Role="Ciudad" Type="DB_37268_panizoModel.Store.Ciudad" Multiplicity="1" />
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Store.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="IdCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosBocadillo_Bocadillo">
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Store.Bocadillo" Multiplicity="1" />
+          <End Role="VotosBocadillo" Type="DB_37268_panizoModel.Store.VotosBocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosBocadillo">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosBocadillo_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Store.Usuario" Multiplicity="1" />
+          <End Role="VotosBocadillo" Type="DB_37268_panizoModel.Store.VotosBocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosBocadillo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosRestaurante_Restaurante">
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Store.Restaurante" Multiplicity="1" />
+          <End Role="VotosRestaurante" Type="DB_37268_panizoModel.Store.VotosRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosRestaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosRestaurante_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Store.Usuario" Multiplicity="1" />
+          <End Role="VotosRestaurante" Type="DB_37268_panizoModel.Store.VotosRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosRestaurante">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_37268_panizoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EntrepanDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bocadillos" EntityType="DB_37268_panizoModel.Bocadillo" />
+          <EntitySet Name="BocadilloIngredientes" EntityType="DB_37268_panizoModel.BocadilloIngrediente" />
+          <EntitySet Name="Ciudades" EntityType="DB_37268_panizoModel.Ciudad" />
+          <EntitySet Name="Ingredientes" EntityType="DB_37268_panizoModel.Ingrediente" />
+          <EntitySet Name="Restaurantes" EntityType="DB_37268_panizoModel.Restaurante" />
+          <EntitySet Name="Usuarios" EntityType="DB_37268_panizoModel.Usuario" />
+          <EntitySet Name="VotosBocadillos" EntityType="DB_37268_panizoModel.VotosBocadillo" />
+          <EntitySet Name="VotosRestaurantes" EntityType="DB_37268_panizoModel.VotosRestaurante" />
+          <AssociationSet Name="FK_Bocadillo_Restaurante" Association="DB_37268_panizoModel.FK_Bocadillo_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+            <End Role="Bocadillo" EntitySet="Bocadillos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Bocadillo" Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillos" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngredientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosBocadillo_Bocadillo" Association="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillos" />
+            <End Role="VotosBocadillo" EntitySet="VotosBocadillos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Ingrediente" Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingredientes" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngredientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BocadilloIngrediente_Usuario" Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="BocadilloIngrediente" EntitySet="BocadilloIngredientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurante_Ciudad" Association="DB_37268_panizoModel.FK_Restaurante_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudades" />
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingrediente_Usuario" Association="DB_37268_panizoModel.FK_Ingrediente_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Ingrediente" EntitySet="Ingredientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosRestaurante_Restaurante" Association="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+            <End Role="VotosRestaurante" EntitySet="VotosRestaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosBocadillo_Usuario" Association="DB_37268_panizoModel.FK_VotosBocadillo_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="VotosBocadillo" EntitySet="VotosBocadillos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VotosRestaurante_Usuario" Association="DB_37268_panizoModel.FK_VotosRestaurante_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="VotosRestaurante" EntitySet="VotosRestaurantes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bocadillo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Restaurante" Relationship="DB_37268_panizoModel.FK_Bocadillo_Restaurante" FromRole="Bocadillo" ToRole="Restaurante" />
+          <NavigationProperty Name="BocadilloIngrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo" FromRole="Bocadillo" ToRole="BocadilloIngrediente" />
+          <NavigationProperty Name="VotosBocadillo" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo" FromRole="Bocadillo" ToRole="VotosBocadillo" />
+        </EntityType>
+        <EntityType Name="BocadilloIngrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdBocadillo" Type="Int32" Nullable="false" />
+          <Property Name="IdIngrediente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo" FromRole="BocadilloIngrediente" ToRole="Bocadillo" />
+          <NavigationProperty Name="Ingrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Ingrediente" FromRole="BocadilloIngrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="Usuario" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario" FromRole="BocadilloIngrediente" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Restaurante" Relationship="DB_37268_panizoModel.FK_Restaurante_Ciudad" FromRole="Ciudad" ToRole="Restaurante" />
+        </EntityType>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="350" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="BocadilloIngrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Ingrediente" FromRole="Ingrediente" ToRole="BocadilloIngrediente" />
+          <NavigationProperty Name="Usuario" Relationship="DB_37268_panizoModel.FK_Ingrediente_Usuario" FromRole="Ingrediente" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCiudad" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CP" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_Bocadillo_Restaurante" FromRole="Restaurante" ToRole="Bocadillo" />
+          <NavigationProperty Name="Ciudad" Relationship="DB_37268_panizoModel.FK_Restaurante_Ciudad" FromRole="Restaurante" ToRole="Ciudad" />
+          <NavigationProperty Name="VotosRestaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" FromRole="Restaurante" ToRole="VotosRestaurante" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Nick" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="BocadilloIngrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario" FromRole="Usuario" ToRole="BocadilloIngrediente" />
+          <NavigationProperty Name="Ingrediente" Relationship="DB_37268_panizoModel.FK_Ingrediente_Usuario" FromRole="Usuario" ToRole="Ingrediente" />
+          <NavigationProperty Name="VotosBocadillo" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Usuario" FromRole="Usuario" ToRole="VotosBocadillo" />
+          <NavigationProperty Name="VotosRestaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Usuario" FromRole="Usuario" ToRole="VotosRestaurante" />
+        </EntityType>
+        <EntityType Name="VotosBocadillo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdBocadillo" Type="Int32" Nullable="false" />
+          <Property Name="Voto" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo" FromRole="VotosBocadillo" ToRole="Bocadillo" />
+          <NavigationProperty Name="Usuario" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Usuario" FromRole="VotosBocadillo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="VotosRestaurante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="Voto" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Restaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" FromRole="VotosRestaurante" ToRole="Restaurante" />
+          <NavigationProperty Name="Usuario" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Usuario" FromRole="VotosRestaurante" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Bocadillo_Restaurante">
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Restaurante" Multiplicity="1" />
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Bocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bocadillo">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Bocadillo">
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Bocadillo" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosBocadillo_Bocadillo">
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Bocadillo" Multiplicity="1" />
+          <End Role="VotosBocadillo" Type="DB_37268_panizoModel.VotosBocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosBocadillo">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Ingrediente">
+          <End Role="Ingrediente" Type="DB_37268_panizoModel.Ingrediente" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdIngrediente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BocadilloIngrediente_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Usuario" Multiplicity="1" />
+          <End Role="BocadilloIngrediente" Type="DB_37268_panizoModel.BocadilloIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BocadilloIngrediente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurante_Ciudad">
+          <End Role="Ciudad" Type="DB_37268_panizoModel.Ciudad" Multiplicity="1" />
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Restaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Restaurante">
+              <PropertyRef Name="IdCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingrediente_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Usuario" Multiplicity="1" />
+          <End Role="Ingrediente" Type="DB_37268_panizoModel.Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingrediente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosRestaurante_Restaurante">
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Restaurante" Multiplicity="1" />
+          <End Role="VotosRestaurante" Type="DB_37268_panizoModel.VotosRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosRestaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosBocadillo_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Usuario" Multiplicity="1" />
+          <End Role="VotosBocadillo" Type="DB_37268_panizoModel.VotosBocadillo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosBocadillo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VotosRestaurante_Usuario">
+          <End Role="Usuario" Type="DB_37268_panizoModel.Usuario" Multiplicity="1" />
+          <End Role="VotosRestaurante" Type="DB_37268_panizoModel.VotosRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VotosRestaurante">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_37268_panizoModelStoreContainer" CdmEntityContainer="EntrepanDB">
+          <EntitySetMapping Name="Bocadillos"><EntityTypeMapping TypeName="DB_37268_panizoModel.Bocadillo"><MappingFragment StoreEntitySet="Bocadillo">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="Precio" ColumnName="Precio" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BocadilloIngredientes"><EntityTypeMapping TypeName="DB_37268_panizoModel.BocadilloIngrediente"><MappingFragment StoreEntitySet="BocadilloIngrediente">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+            <ScalarProperty Name="IdBocadillo" ColumnName="IdBocadillo" />
+            <ScalarProperty Name="IdIngrediente" ColumnName="IdIngrediente" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Ciudades"><EntityTypeMapping TypeName="DB_37268_panizoModel.Ciudad"><MappingFragment StoreEntitySet="Ciudad">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Ingredientes"><EntityTypeMapping TypeName="DB_37268_panizoModel.Ingrediente"><MappingFragment StoreEntitySet="Ingrediente">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Restaurantes"><EntityTypeMapping TypeName="DB_37268_panizoModel.Restaurante"><MappingFragment StoreEntitySet="Restaurante">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+            <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+            <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+            <ScalarProperty Name="CP" ColumnName="CP" />
+            <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+            <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Usuarios"><EntityTypeMapping TypeName="DB_37268_panizoModel.Usuario"><MappingFragment StoreEntitySet="Usuario">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Nick" ColumnName="Nick" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="VotosBocadillos"><EntityTypeMapping TypeName="DB_37268_panizoModel.VotosBocadillo"><MappingFragment StoreEntitySet="VotosBocadillo">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+            <ScalarProperty Name="IdBocadillo" ColumnName="IdBocadillo" />
+            <ScalarProperty Name="Voto" ColumnName="Voto" />
+            <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="VotosRestaurantes"><EntityTypeMapping TypeName="DB_37268_panizoModel.VotosRestaurante"><MappingFragment StoreEntitySet="VotosRestaurante">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+            <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+            <ScalarProperty Name="Voto" ColumnName="Voto" />
+            <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+            <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Entrepan">
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Bocadillo" Width="1.5" PointX="0.75" PointY="10.125" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.BocadilloIngrediente" Width="1.5" PointX="5.25" PointY="7.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Ciudad" Width="1.5" PointX="1.5" PointY="1.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Ingrediente" Width="1.5" PointX="3" PointY="9.375" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Restaurante" Width="1.5" PointX="3.75" PointY="0.875" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Usuario" Width="1.5" PointX="0.75" PointY="6.125" Height="2.7494921874999987" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.VotosBocadillo" Width="1.5" PointX="3" PointY="5.25" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_37268_panizoModel.VotosRestaurante" Width="1.5" PointX="6" PointY="4.25" Height="2.5571907552083317" IsExpanded="true" />
+        <AssociationConnector Association="DB_37268_panizoModel.FK_Bocadillo_Restaurante" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="4.0090950520833335" />
+          <ConnectorPoint PointX="4.875" PointY="12.338440755208334" />
+          <ConnectorPoint PointX="2.25" PointY="12.338440755208334" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.0391625390625" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="12.0391625390625" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="12.0391625390625" />
+          <ConnectorPoint PointX="6" PointY="12.0391625390625" />
+          <ConnectorPoint PointX="6" PointY="10.114889322916667" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.126152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="9.7511528461538468" />
+          <ConnectorPoint PointX="2.625" PointY="6.5285953776041659" />
+          <ConnectorPoint PointX="3" PointY="6.5285953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Ingrediente" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.7449446614583337" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.7449446614583337" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="9.7449446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="9.7449446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="5.25" PointY="8.3720914713541656" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_Restaurante_Ciudad" ManuallyRouted="false">
+          <ConnectorPoint PointX="3" PointY="2.422841796875" />
+          <ConnectorPoint PointX="3.75" PointY="2.422841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_Ingrediente_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.8121834951923077" />
+          <ConnectorPoint PointX="2.5660744349011213" PointY="9.1282579300934277" />
+          <ConnectorPoint PointX="2.6839255650988791" PointY="9.246109060291186" />
+          <ConnectorPoint PointX="2.8125" PointY="9.3746834951923077" />
+          <ConnectorPoint PointX="2.8125" PointY="9.1863471538461532" />
+          <ConnectorPoint PointX="3.0011528461538459" PointY="9.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="2.4420475260416667" />
+          <ConnectorPoint PointX="6.75" PointY="2.4420475260416667" />
+          <ConnectorPoint PointX="6.75" PointY="4.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_VotosBocadillo_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="7.2303930664062488" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.2303930664062479" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.2303930664062488" />
+          <ConnectorPoint PointX="3" PointY="7.2303930664062488" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_VotosRestaurante_Usuario" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="6.125" />
+          <ConnectorPoint PointX="1.5" PointY="4.71875" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="4.7187499999999991" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="4.71875" />
+          <ConnectorPoint PointX="6" PointY="4.71875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
