@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using PanizoMVC.Models;
+using PanizoMVC.Utilities;
 
 namespace PanizoMVC.Controllers
 {
@@ -15,7 +16,7 @@ namespace PanizoMVC.Controllers
         //
         // GET: /Account/LogOn
 
-        public ActionResult LogOn()
+        public ActionResult Logon()
         {
             return View();
         }

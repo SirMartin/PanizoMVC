@@ -14,7 +14,8 @@ namespace PanizoMVC.Interfaces
         }
 
         List<Usuario> GetUsuarios();
-        Usuario GetUsuarioById(int idUsuario);
+        Usuario GetUsuarioByTwitterUserId(String idTwitterUser);
+        Usuario GetUsuarioById(int idTwitterUsuario);
         Usuario GetUsuarioByEmail(String email);
         Boolean IsLoginCorrecto(String email, String pass);
         void AddUsuario(Usuario usuario);

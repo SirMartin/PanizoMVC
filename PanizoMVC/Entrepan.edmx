@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_37268_panizoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="DB_37268_panizoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DB_37268_panizoModelStoreContainer">
           <EntitySet Name="Bocadillo" EntityType="DB_37268_panizoModel.Store.Bocadillo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BocadilloIngrediente" EntityType="DB_37268_panizoModel.Store.BocadilloIngrediente" store:Type="Tables" Schema="dbo" />
@@ -110,10 +110,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="250" />
-          <Property Name="Nick" Type="nvarchar" Nullable="false" MaxLength="150" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Nick" Type="nvarchar" MaxLength="150" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="TwitterAccessSecret" Type="nvarchar(max)" />
+          <Property Name="TwitterAccessKey" Type="nvarchar(max)" />
+          <Property Name="TwitterUserId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VotosBocadillo">
           <Key>
@@ -257,8 +260,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_37268_panizoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -379,14 +381,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
-          <Property Name="Nick" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="250" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="Nick" Type="String" MaxLength="150" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" Nullable="true" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="BocadilloIngrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario" FromRole="Usuario" ToRole="BocadilloIngrediente" />
           <NavigationProperty Name="Ingrediente" Relationship="DB_37268_panizoModel.FK_Ingrediente_Usuario" FromRole="Usuario" ToRole="Ingrediente" />
           <NavigationProperty Name="VotosBocadillo" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Usuario" FromRole="Usuario" ToRole="VotosBocadillo" />
           <NavigationProperty Name="VotosRestaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Usuario" FromRole="Usuario" ToRole="VotosRestaurante" />
+          <Property Type="String" Name="TwitterAccessSecret" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TwitterAccessKey" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TwitterUserId" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VotosBocadillo">
           <Key>
@@ -576,7 +581,10 @@
             <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Usuarios"><EntityTypeMapping TypeName="DB_37268_panizoModel.Usuario"><MappingFragment StoreEntitySet="Usuario">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="TwitterUserId" ColumnName="TwitterUserId" />
+                <ScalarProperty Name="TwitterAccessKey" ColumnName="TwitterAccessKey" />
+                <ScalarProperty Name="TwitterAccessSecret" ColumnName="TwitterAccessSecret" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Email" ColumnName="Email" />
             <ScalarProperty Name="Nick" ColumnName="Nick" />
             <ScalarProperty Name="Password" ColumnName="Password" />

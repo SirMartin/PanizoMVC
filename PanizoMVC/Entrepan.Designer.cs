@@ -1466,17 +1466,11 @@ namespace PanizoMVC
         /// Create a new Usuario object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="email">Initial value of the Email property.</param>
-        /// <param name="nick">Initial value of the Nick property.</param>
-        /// <param name="password">Initial value of the Password property.</param>
         /// <param name="fechaCreacion">Initial value of the FechaCreacion property.</param>
-        public static Usuario CreateUsuario(global::System.Int32 id, global::System.String email, global::System.String nick, global::System.String password, global::System.DateTime fechaCreacion)
+        public static Usuario CreateUsuario(global::System.Int32 id, global::System.DateTime fechaCreacion)
         {
             Usuario usuario = new Usuario();
             usuario.Id = id;
-            usuario.Email = email;
-            usuario.Nick = nick;
-            usuario.Password = password;
             usuario.FechaCreacion = fechaCreacion;
             return usuario;
         }
@@ -1514,7 +1508,7 @@ namespace PanizoMVC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Email
         {
@@ -1526,7 +1520,7 @@ namespace PanizoMVC
             {
                 OnEmailChanging(value);
                 ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, false);
+                _Email = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Email");
                 OnEmailChanged();
             }
@@ -1538,7 +1532,7 @@ namespace PanizoMVC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Nick
         {
@@ -1550,7 +1544,7 @@ namespace PanizoMVC
             {
                 OnNickChanging(value);
                 ReportPropertyChanging("Nick");
-                _Nick = StructuralObject.SetValidValue(value, false);
+                _Nick = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Nick");
                 OnNickChanged();
             }
@@ -1562,7 +1556,7 @@ namespace PanizoMVC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Password
         {
@@ -1574,7 +1568,7 @@ namespace PanizoMVC
             {
                 OnPasswordChanging(value);
                 ReportPropertyChanging("Password");
-                _Password = StructuralObject.SetValidValue(value, false);
+                _Password = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Password");
                 OnPasswordChanged();
             }
@@ -1606,6 +1600,78 @@ namespace PanizoMVC
         private global::System.DateTime _FechaCreacion;
         partial void OnFechaCreacionChanging(global::System.DateTime value);
         partial void OnFechaCreacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TwitterAccessSecret
+        {
+            get
+            {
+                return _TwitterAccessSecret;
+            }
+            set
+            {
+                OnTwitterAccessSecretChanging(value);
+                ReportPropertyChanging("TwitterAccessSecret");
+                _TwitterAccessSecret = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TwitterAccessSecret");
+                OnTwitterAccessSecretChanged();
+            }
+        }
+        private global::System.String _TwitterAccessSecret;
+        partial void OnTwitterAccessSecretChanging(global::System.String value);
+        partial void OnTwitterAccessSecretChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TwitterAccessKey
+        {
+            get
+            {
+                return _TwitterAccessKey;
+            }
+            set
+            {
+                OnTwitterAccessKeyChanging(value);
+                ReportPropertyChanging("TwitterAccessKey");
+                _TwitterAccessKey = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TwitterAccessKey");
+                OnTwitterAccessKeyChanged();
+            }
+        }
+        private global::System.String _TwitterAccessKey;
+        partial void OnTwitterAccessKeyChanging(global::System.String value);
+        partial void OnTwitterAccessKeyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TwitterUserId
+        {
+            get
+            {
+                return _TwitterUserId;
+            }
+            set
+            {
+                OnTwitterUserIdChanging(value);
+                ReportPropertyChanging("TwitterUserId");
+                _TwitterUserId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TwitterUserId");
+                OnTwitterUserIdChanged();
+            }
+        }
+        private global::System.String _TwitterUserId;
+        partial void OnTwitterUserIdChanging(global::System.String value);
+        partial void OnTwitterUserIdChanged();
 
         #endregion
     

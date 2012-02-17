@@ -35,6 +35,13 @@ namespace PanizoMVC.Repositorys
                     select u).FirstOrDefault();
         }
 
+        public Usuario GetUsuarioByTwitterUserId(String idTwitterUser)
+        {
+            return (from u in _dbContext.Usuarios
+                    where u.TwitterUserId.Equals(idTwitterUser)
+                    select u).FirstOrDefault();
+        }
+
         public Usuario GetUsuarioByEmail(string email)
         {
             return (from u in _dbContext.Usuarios
