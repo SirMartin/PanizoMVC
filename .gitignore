@@ -1,0 +1,11 @@
+bin/
+obj/
+PanizoMVC/*.dll
+PanizoMVC.Tests/*.dll
+PanizoMVC.Tests/*.txt
+PanizoMVC.Tests/*.cache
+TestResults
+*.pdb
+*.suo
+PanizoMVC/App_Error/*
+*.sdf
