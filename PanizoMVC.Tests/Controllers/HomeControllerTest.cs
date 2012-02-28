@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PanizoMVC;
 using PanizoMVC.Controllers;
+using System.Globalization;
 
 namespace PanizoMVC.Tests.Controllers
 {
@@ -36,6 +37,16 @@ namespace PanizoMVC.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Prueba()
+        {
+            String fecha = "02/27/2012";
+            DateTime date;
+            
+            date = DateTime.ParseExact(fecha, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            date = DateTime.Parse(fecha);
         }
     }
 }

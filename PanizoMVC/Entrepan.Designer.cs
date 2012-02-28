@@ -1672,6 +1672,30 @@ namespace PanizoMVC
         private global::System.String _TwitterUserId;
         partial void OnTwitterUserIdChanging(global::System.String value);
         partial void OnTwitterUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FacebookId
+        {
+            get
+            {
+                return _FacebookId;
+            }
+            set
+            {
+                OnFacebookIdChanging(value);
+                ReportPropertyChanging("FacebookId");
+                _FacebookId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FacebookId");
+                OnFacebookIdChanged();
+            }
+        }
+        private global::System.String _FacebookId;
+        partial void OnFacebookIdChanging(global::System.String value);
+        partial void OnFacebookIdChanged();
 
         #endregion
     
