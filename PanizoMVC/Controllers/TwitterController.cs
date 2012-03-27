@@ -68,7 +68,7 @@ namespace PanizoMVC.Controllers
                 usuarioRepository.DBContext = dbContext;
 
                 //Realizamos la busqueda del usuario.
-                Usuario usuario =usuarioRepository.GetUsuarioById(int.Parse(tokens.UserId.ToString()));
+                Usuario usuario = usuarioRepository.GetUsuarioByTwitterUserId(tokens.UserId.ToString());
                 if (usuario == null)
                 {
                     usuario = new Usuario()
@@ -76,7 +76,7 @@ namespace PanizoMVC.Controllers
                         Nick = tokens.ScreenName,
                         TwitterUserId = tokens.UserId.ToString(),
                         TwitterAccessKey = tokens.Token,
-                        TwitterAccessSecret = tokens.TokenSecret, 
+                        TwitterAccessSecret = tokens.TokenSecret,
                         FechaCreacion = DateTime.UtcNow
                     };
 

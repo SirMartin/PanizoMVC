@@ -42,6 +42,13 @@ namespace PanizoMVC.Repositorys
                     select u).FirstOrDefault();
         }
 
+        public Usuario GetUsuarioByFacebookUserId(string idFacebookUser)
+        {
+            return (from u in _dbContext.Usuarios
+                    where u.FacebookId.Equals(idFacebookUser)
+                    select u).FirstOrDefault();
+        }
+
         public Usuario GetUsuarioByEmail(string email)
         {
             return (from u in _dbContext.Usuarios

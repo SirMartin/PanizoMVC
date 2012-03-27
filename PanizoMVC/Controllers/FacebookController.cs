@@ -7,11 +7,30 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Web.Security;
 using Facebook;
+using PanizoMVC.Interfaces;
+using System.Web.Routing;
+using PanizoMVC.Repositorys;
 
 namespace PanizoMVC.Controllers
 {
     public class FacebookController : BaseController
     {
+        #region Repositorios
+
+        public IUsuarioRep usuarioRepository { get; set; }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (usuarioRepository == null)
+            {
+                usuarioRepository = new UsuarioRepository();
+            }
+
+            base.Initialize(requestContext);
+        }
+
+        #endregion
+
         private const string logoffUrlDebug = "http://localhost:50649/";
         private const string redirectUrlDebug = "http://localhost:50649/Facebook/OAuth";
         private const string logoffUrl = "http://www.entrepan.net/";
@@ -65,17 +84,27 @@ namespace PanizoMVC.Controllers
                     dynamic me = fbClient.Get("me?fields=id,name");
                     long facebookId = Convert.ToInt64(me.id);
 
-                    Usuario usuario = new Usuario();
-                    usuario.FacebookId = facebookId.ToString();
-                    usuario.Nick = (string)me.name;
-
-                    /*InMemoryUserStore.Add(new FacebookUser
+                    using (EntrepanDB dbContext = GetNewDBContext())
                     {
-                        AccessToken = accessToken,
-                        Expires = expiresOn,
-                        FacebookId = facebookId,
-                        Name = (string)me.name,
-                    });*/
+                        //Asignamos el context.
+                        usuarioRepository.DBContext = dbContext;
+
+                        //Generamos el usuario.
+                        Usuario usuario = new Usuario();
+                        usuario.FacebookId = facebookId.ToString();
+                        usuario.Nick = (string)me.name;
+                        usuario.Email = (string)me.email;
+                        usuario.FechaCreacion = DateTime.Now;
+
+                        //Comprobamos si existe en la BBDD como registrado, si no lo creamos.
+                        Usuario userdb = usuarioRepository.GetUsuarioByFacebookUserId(usuario.FacebookId);
+                        if (userdb == null)
+                        {
+                            //Es un usuario nuevo. Lo guardamos en la BBDD.
+                            usuarioRepository.AddUsuario(usuario);
+                            dbContext.SaveChanges();
+                        }
+                    }
 
                     FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
 
