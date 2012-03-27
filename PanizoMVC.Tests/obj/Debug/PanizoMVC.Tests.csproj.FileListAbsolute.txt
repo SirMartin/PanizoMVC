@@ -1,8 +1,0 @@
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\bin\Debug\PanizoMVC.Tests.dll.config
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\bin\Debug\PanizoMVC.Tests.dll
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\bin\Debug\PanizoMVC.Tests.pdb
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\bin\Debug\PanizoMVC.dll
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\bin\Debug\PanizoMVC.pdb
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\obj\Debug\PanizoMVC.Tests.dll
-C:\Users\eil\Dropbox\PanizoMVC\PanizoMVC\PanizoMVC.Tests\obj\Debug\PanizoMVC.Tests.pdb
