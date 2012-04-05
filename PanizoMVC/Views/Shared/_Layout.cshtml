@@ -78,27 +78,6 @@
         media="screen" />
 </head>
 <body class="home">
-    @*    <div class="page">
-        <header>
-            <div id="title">
-                <h1>My MVC Application</h1>
-            </div>
-            <div id="logindisplay">
-                @Html.Partial("_LogOnPartial")
-            </div>
-            <nav>
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                </ul>
-            </nav>
-        </header>
-        <section id="main">
-            @RenderBody()
-        </section>
-        <footer>
-        </footer>
-    </div>*@
     <!-- WRAPPER -->
     <div id="wrapper">
         <!-- HEADER -->
@@ -109,8 +88,8 @@
             <!-- Social -->
             <div id="social-holder">
                 <ul class="social">
-                    <li><a href="http://www.facebook.com" class="poshytip facebook" title="Hazte fan">
-                    </a></li>
+                    <li><a href="http://www.facebook.com" class="poshytip facebook" title="Hazte fan"></a>
+                    </li>
                     <li><a href="http://www.twitter.com" class="poshytip twitter" title="Siguenos en Twitter">
                     </a></li>
                 </ul>
@@ -121,23 +100,51 @@
             </div>
             <!-- Navigation -->
             <ul id="nav" class="sf-menu">
-                <li class="current-menu-item">@Html.ActionLink("HOME", "Index", "Home")</li>
-                <li><a href="features.html">LOCALES</a>
-                    <ul>
+                @if ((Request.Url.ToString().ToLower().Contains("/Restaurante".ToLower()))
+                    || (Request.Url.ToString().ToLower().Contains("/Bocadillo".ToLower()))
+                    || (Request.Url.ToString().ToLower().Contains("/Home/About".ToLower())))
+                {
+                    <li>@Html.ActionLink("HOME", "Index", "Home")</li>
+                }
+                else
+                {
+                    <li class="current-menu-item">@Html.ActionLink("HOME", "Index", "Home")</li>
+                }
+                @if (Request.Url.ToString().ToLower().Contains("/Restaurante".ToLower()))
+                {
+                    <li class="current-menu-item">@Html.ActionLink("LOCALES", "Index", "Restaurante")
+                        @*                    <ul>
                         <li><a href="features-appearance.html"><span>Los + votados</span></a></li>
                         <li><a href="features-columns.html"><span>Últimos</span></a></li>
                         <li><a href="features-accordion.html"><span>Añadir local</span></a></li>
                         <li><a href="features-accordion.html"><span>Otros</span></a></li>
-                    </ul>
-                </li>
-                <li><a href="portfolio.html">BOCADILLOS</a>
-                    <ul>
+                    </ul>*@ </li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("LOCALES", "Index", "Restaurante")</li>
+                }
+                @if (Request.Url.ToString().ToLower().Contains("/Bocadillo".ToLower()))
+                {
+                    <li class="current-menu-item">@Html.ActionLink("BOCADILLOS", "Index", "Bocadillo")
+                        @*<ul>
                         <li><a href="features-appearance.html"><span>Los + votados</span></a></li>
                         <li><a href="features-columns.html"><span>Últimos</span></a></li>
                         <li><a href="features-accordion.html"><span>Añadir bocadillo</span></a></li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">CONTACTO</a></li>
+                    </ul>*@ </li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("BOCADILLOS", "Index", "Bocadillo")</li>
+                }
+                @if (Request.Url.ToString().ToLower().Contains("/Home/About".ToLower()))
+                {
+                    <li class="current-menu-item">@Html.ActionLink("CONTACTO", "About", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("CONTACTO", "About", "Home")</li>
+                }
             </ul>
             <!-- Navigation -->
             <!-- search -->
@@ -166,7 +173,8 @@
         <div id="footer">
             <!-- Bottom -->
             <div id="bottom">
-                2012 - <a href="http://www.entrepan.net">Entrepan</a> todos los derechos reservados. Desarrollado por <a target="_blank" href="http://www.piribisoft.com" >PiribiSoft</a>
+                2012 - <a href="http://www.entrepan.net">Entrepan</a> todos los derechos reservados.
+                Desarrollado por <a target="_blank" href="http://www.piribisoft.com">PiribiSoft</a>
                 <div id="to-top" class="poshytip" title="Arriba">
                 </div>
             </div>
