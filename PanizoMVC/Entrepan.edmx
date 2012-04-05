@@ -104,6 +104,8 @@
           <Property Name="Telefono" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Web" Type="nvarchar" MaxLength="150" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -376,6 +378,8 @@
           <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_Bocadillo_Restaurante" FromRole="Restaurante" ToRole="Bocadillo" />
           <NavigationProperty Name="Ciudad" Relationship="DB_37268_panizoModel.FK_Restaurante_Ciudad" FromRole="Restaurante" ToRole="Ciudad" />
           <NavigationProperty Name="VotosRestaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" FromRole="Restaurante" ToRole="VotosRestaurante" />
+          <Property Type="String" Name="Web" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -573,7 +577,9 @@
             <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Restaurantes"><EntityTypeMapping TypeName="DB_37268_panizoModel.Restaurante"><MappingFragment StoreEntitySet="Restaurante">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Web" ColumnName="Web" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
             <ScalarProperty Name="Nombre" ColumnName="Nombre" />
             <ScalarProperty Name="Direccion" ColumnName="Direccion" />

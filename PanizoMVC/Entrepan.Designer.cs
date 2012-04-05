@@ -1362,6 +1362,54 @@ namespace PanizoMVC
         private global::System.DateTime _FechaCreacion;
         partial void OnFechaCreacionChanging(global::System.DateTime value);
         partial void OnFechaCreacionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Web
+        {
+            get
+            {
+                return _Web;
+            }
+            set
+            {
+                OnWebChanging(value);
+                ReportPropertyChanging("Web");
+                _Web = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Web");
+                OnWebChanged();
+            }
+        }
+        private global::System.String _Web;
+        partial void OnWebChanging(global::System.String value);
+        partial void OnWebChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
 
         #endregion
     
