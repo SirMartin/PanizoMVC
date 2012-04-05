@@ -86,6 +86,9 @@ namespace PanizoMVC.Controllers
         [HttpPost]
         public ActionResult Create(Restaurante restaurante)
         {
+            //Añadimos la ciudad y la fecha de creación.
+            restaurante.FechaCreacion = DateTime.Now;
+            restaurante.IdCiudad = 1;
             if (ModelState.IsValid)
             {
                 db.Restaurantes.AddObject(restaurante);
