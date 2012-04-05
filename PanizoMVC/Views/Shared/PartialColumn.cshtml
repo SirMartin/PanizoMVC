@@ -1,0 +1,9 @@
+﻿@model PanizoMVC.Models.ColumnModel
+<li><a href="@Url.Action(Model.Action, Model.Controller)" class="thumb" title="An image">
+    <img src="@Model.UrlImage" alt="Post" /></a>
+    <div>
+        @Html.ActionLink(Model.Titulo, Model.Action, Model.Controller, null, new { @class = "header" })
+        @Model.Texto
+    </div>
+    <a href="@Url.Action(Model.Action, Model.Controller)">@Model.TextoAbajo &#8594;</a>
+</li>

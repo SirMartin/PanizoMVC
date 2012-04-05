@@ -1,70 +1,24 @@
 ﻿@model IEnumerable<PanizoMVC.Restaurante>
-
 @{
-    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            Ciudad
-        </th>
-        <th>
-            Nombre
-        </th>
-        <th>
-            Direccion
-        </th>
-        <th>
-            CP
-        </th>
-        <th>
-            Telefono
-        </th>
-        <th>
-            Descripcion
-        </th>
-        <th>
-            FechaCreacion
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ciudad.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CP)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreacion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<!-- Slider -->
+<div id="slider-block">
+    <div id="slider-holder">
+        <div id="slider">
+            <a href="http://www.luiszuno.com">
+                <img src="http://lorempixel.com/906/390/food/5" title="Visit my web site regularly and get freebies each week!"
+                    alt="" /></a> <a href="http://themeforest.net/user/Ansimuz/portfolio?ref=ansimuz">
+                        <img src="http://lorempixel.com/906/390/people/2" title="Eugenio es una marica que no sabe jugar al padel."
+                            alt="" /></a>
+        </div>
+    </div>
+</div>
+<!-- ENDS Slider -->
+<div class="panes">
+    <ul class="blocks-thumbs thumbs-rollover">
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column1)
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column2)
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column3)
+    </ul>
+</div>
