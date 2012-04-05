@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PanizoMVC;
+using PanizoMVC.Models;
 
 namespace PanizoMVC.Controllers
 {
@@ -18,6 +19,45 @@ namespace PanizoMVC.Controllers
 
         public ViewResult Index()
         {
+            //Creamos un modelo de columna.
+            ColumnModel col1 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/1",
+                Titulo = "Añade tu restaurante",
+                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                TextoAbajo = "Añadir Restaurante",
+                Action = "Create",
+                Controller = "Restaurante"
+            };
+
+            ViewBag.Column1 = col1;
+
+            //Creamos un modelo de columna.
+            ColumnModel col2 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/3",
+                Titulo = "Añade tu restaurante",
+                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                TextoAbajo = "Ver los mas valorados",
+                Action = "Valorados",
+                Controller = "Restaurante"
+            };
+
+            ViewBag.Column2 = col2;
+
+            //Creamos un modelo de columna.
+            ColumnModel col3 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/7",
+                Titulo = "Los últimos en llegar",
+                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                TextoAbajo = "Nuevos Restaurantes",
+                Action = "Ultimos",
+                Controller = "Restaurante"
+            };
+
+            ViewBag.Column3 = col3;
+
             var restaurantes = db.Restaurantes.Include("Ciudad");
             return View(restaurantes.ToList());
         }
