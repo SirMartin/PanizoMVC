@@ -13,27 +13,27 @@
     <fieldset>
         <div>
             @Html.LabelFor(model => model.Nombre)
-            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-poshytip", title = "Introduce el nombre del restaurante" })
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-poshytip", title = "Introduce el nombre del restaurante", tabindex = 1 })
             @Html.ValidationMessageFor(model => model.Nombre)
         </div>
         <div>
             @Html.LabelFor(model => model.Email)
-            @Html.TextBoxFor(model => model.Email, new { @class = "form-poshytip", title = "Introduce el email de contacto" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-poshytip", title = "Introduce el email de contacto", tabindex = 2 })
             @Html.ValidationMessageFor(model => model.Email)
         </div>
         <div>
             @Html.LabelFor(model => model.Web)
-            @Html.TextBoxFor(model => model.Web, new { @class = "form-poshytip", title = "Introduce la web del restaurante" })
+            @Html.TextBoxFor(model => model.Web, new { @class = "form-poshytip", title = "Introduce la web del restaurante", tabindex = 3 })
             @Html.ValidationMessageFor(model => model.Web)
         </div>
         <div>
             @Html.LabelFor(model => model.Descripcion)
-            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-poshytip", title = "Una breve descripción", rows = "5", cols = "20" })
+            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-poshytip", title = "Una breve descripción", rows = "5", cols = "20", tabindex = 4 })
             @Html.ValidationMessageFor(model => model.Descripcion)
         </div>
     </fieldset>
     <p>
-        <input type="submit" value="AÑADIR" name="submit" id="submit" /></p>
+        <input type="submit" value="AÑADIR" name="submit" id="submit" tabindex="9" title="Añadir Restaurante" /></p>
     <p id="error" class="warning">
         Message</p>
     <p id="success" class="success">
@@ -47,17 +47,22 @@
         &nbsp;</h2>
     <div>
         @Html.LabelFor(model => model.Direccion)
-        @Html.TextBoxFor(model => model.Direccion, new { @class = "form-poshytip", title = "Introduce la dirección" })
+        @Html.TextBoxFor(model => model.Direccion, new { @class = "form-poshytip", title = "Introduce la dirección", tabindex = 5 })
         @Html.ValidationMessageFor(model => model.Direccion)
+    </div>
+    <div class="my-skinnable-select">
+        @Html.LabelFor(model => model.IdCiudad, "Ciudad")
+        @Html.DropDownList("IdCiudad", (SelectList)ViewBag.IdCiudad, new {@class = "form-poshytip", title = "Introduce la localidad", tabindex = 6 })
+        @Html.ValidationMessageFor(model => model.IdCiudad)
     </div>
     <div>
         @Html.LabelFor(model => model.CP)
-        @Html.TextBoxFor(model => model.CP, new { @class = "form-poshytip", title = "Introduce el código postal" })
+        @Html.TextBoxFor(model => model.CP, new { @class = "form-poshytip", style = "width:100px;", title = "Introduce el código postal", tabindex = 7 })
         @Html.ValidationMessageFor(model => model.CP)
     </div>
     <div>
         @Html.LabelFor(model => model.Telefono)
-        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-poshytip", title = "Introduce el teléfono de contacto" })
+        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-poshytip", title = "Introduce el teléfono de contacto", tabindex = 8 })
         @Html.ValidationMessageFor(model => model.Telefono)
     </div>
 </div>

@@ -36,7 +36,7 @@ namespace PanizoMVC.Controllers
             ColumnModel col2 = new ColumnModel()
             {
                 UrlImage = "http://lorempixel.com/282/150/food/3",
-                Titulo = "Añade tu restaurante",
+                Titulo = "Los + Valorados",
                 Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
                 TextoAbajo = "Ver los mas valorados",
                 Action = "Valorados",
