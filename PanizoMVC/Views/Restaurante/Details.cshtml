@@ -1,51 +1,96 @@
-﻿@model PanizoMVC.Restaurante
-
+﻿@*@model PanizoMVC.Restaurante
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
+<h2>
+    Details</h2>
 <fieldset>
     <legend>Restaurante</legend>
-
-    <div class="display-label">Ciudad</div>
+    <div class="display-label">
+        Ciudad</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Ciudad.Nombre)
     </div>
-
-    <div class="display-label">Nombre</div>
+    <div class="display-label">
+        Nombre</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Nombre)
     </div>
-
-    <div class="display-label">Direccion</div>
+    <div class="display-label">
+        Direccion</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Direccion)
     </div>
-
-    <div class="display-label">CP</div>
+    <div class="display-label">
+        CP</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.CP)
     </div>
-
-    <div class="display-label">Telefono</div>
+    <div class="display-label">
+        Telefono</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Telefono)
     </div>
-
-    <div class="display-label">Descripcion</div>
+    <div class="display-label">
+        Descripcion</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Descripcion)
     </div>
-
-    <div class="display-label">FechaCreacion</div>
+    <div class="display-label">
+        FechaCreacion</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.FechaCreacion)
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+*@
+<head>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false">
+    </script>
+    <script type="text/javascript">
+
+        var map = null;
+        var geocoder = null;
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+
+            var query = "paseo independencia 23 50001 Zaragoza";
+            geocode({ 'address': query });
+        }
+
+        function geocode(request) {
+
+            var location = geocoder.geocode(request, showResults);
+            return location;
+        }
+
+        function showResults(results, status) {
+            if (!results) {
+                alert("Geocoder did not return a valid response");
+            } else {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var latlng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+                    results[0].geometry.location;
+
+                    var myOptions = {
+                        zoom: 18,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+
+                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                }
+            }
+        }
+
+    </script>
+</head>
+<body onload="initialize()">
+    <div id="map_canvas" style="width: 100%; height: 100%">
+    </div>
+</body>
