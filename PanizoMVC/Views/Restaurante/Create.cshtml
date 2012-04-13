@@ -8,8 +8,10 @@
 <!-- column (left)-->
 <div class="one-column">
     <!-- form -->
+    <br />
     <h2>
         Crear Restaurante</h2>
+    <br />
     <fieldset>
         <div>
             @Html.LabelFor(model => model.Nombre)
@@ -43,16 +45,18 @@
 <!-- ENDS column -->
 <!-- column (right)-->
 <div class="one-column">
+    <br />
     <h2>
         &nbsp;</h2>
+    <br />
     <div>
         @Html.LabelFor(model => model.Direccion)
         @Html.TextBoxFor(model => model.Direccion, new { @class = "form-poshytip", title = "Introduce la dirección", tabindex = 5 })
         @Html.ValidationMessageFor(model => model.Direccion)
     </div>
+    @Html.LabelFor(model => model.IdCiudad, "Ciudad")
     <div class="my-skinnable-select">
-        @Html.LabelFor(model => model.IdCiudad, "Ciudad")
-        @Html.DropDownList("IdCiudad", (SelectList)ViewBag.IdCiudad, new {@class = "form-poshytip", title = "Introduce la localidad", tabindex = 6 })
+        @Html.DropDownList("IdCiudad", (SelectList)ViewBag.IdCiudad, new { @class = "form-poshytip", title = "Introduce la localidad", tabindex = 6 })
         @Html.ValidationMessageFor(model => model.IdCiudad)
     </div>
     <div>
