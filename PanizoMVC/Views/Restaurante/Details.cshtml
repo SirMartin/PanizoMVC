@@ -49,7 +49,7 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 *@
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+@*<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <div id="map_canvas" style="width: 500px; height: 500px;">
 </div>
 <script type="text/javascript">
@@ -63,7 +63,7 @@
     function initialize() {
         geocoder = new google.maps.Geocoder();
 
-        var query = "paseo independencia 23 50001 Zaragoza";
+        var query = "@(Model.Direccion) @(Model.CP) @(Model.Ciudad.Nombre)'";
         geocode({ 'address': query });
     }
 
@@ -90,17 +90,35 @@
                 var divMap = document.getElementById("map_canvas");
                 map = new google.maps.Map(divMap, myOptions);
 
+                var image = new google.maps.MarkerImage(
+                    '@Url.Content("/Content/images/marker-images/image.png")',
+                    new google.maps.Size(60, 40),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(30, 40)
+                );
+
+                var shadow = new google.maps.MarkerImage(
+                    '@Url.Content("/Content/images/marker-images/shadow.png")',
+                    new google.maps.Size(84, 40),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(30, 40)
+                  );
+
                 var marker = new google.maps.Marker
                 (
                     {
+                        draggable: false,
+                        raiseOnDrag: false,
                         position: new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng()),
                         map: map,
+                        icon: image,
+                        shadow: shadow,
                         title: '@(Model.Nombre)'
                     }
-                );
+                );                
 
-                    var infowindow = new google.maps.InfoWindow({
-                        content: '@(Model.Nombre)<br/>@(Model.Telefono)<br/>@(Model.Direccion) @(Model.CP)<br/>@(Model.Ciudad.Nombre)'
+                var infowindow = new google.maps.InfoWindow({
+                    content: '@(Model.Nombre)<br/>@(Model.Telefono)<br/>@(Model.Direccion) @(Model.CP)<br/>@(Model.Ciudad.Nombre)'
                 });
                 google.maps.event.addListener(marker, 'click', function () {
                     // Calling the open method of the infoWindow 
@@ -110,3 +128,4 @@
         }
     }
 </script>
+*@
