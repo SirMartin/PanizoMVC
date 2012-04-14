@@ -39,8 +39,10 @@ namespace PanizoMVC.Controllers
                 Titulo = "Los + Valorados",
                 Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
                 TextoAbajo = "Ver los mas valorados",
-                Action = "Valorados",
-                Controller = "Restaurante"
+                //Action = "Valorados",
+                //Controller = "Restaurante"
+                Action = "Index",
+                Controller = "AdminRestaurante"
             };
 
             ViewBag.Column2 = col2;

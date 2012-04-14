@@ -145,6 +145,8 @@
     <Content Include="Content\images\01.jpg" />
     <Content Include="Content\images\02.jpg" />
     <Content Include="Content\images\03.png" />
+    <Content Include="Content\images\marker-images\image.png" />
+    <Content Include="Content\images\marker-images\shadow.png" />
     <Content Include="Content\images\sdd.jpg" />
     <Content Include="Content\images\sdd_.jpg" />
     <Content Include="Content\images\twitter_connect.png" />
