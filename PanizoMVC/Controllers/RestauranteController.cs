@@ -93,10 +93,8 @@ namespace PanizoMVC.Controllers
                 Titulo = "Los + Valorados",
                 Texto = "Aquí encontraras el top de los bocadillos del restaurante. Las especialidades del sitio.",
                 TextoAbajo = "Ver los mas valorados",
-                //Action = "Valorados",
-                //Controller = "Bocadillo"
-                Action = "Index",
-                Controller = "AdminBocadillo",
+                Action = "Valorados",
+                Controller = "Bocadillo",
                 Parameters = new System.Web.Routing.RouteValueDictionary(new { IdRestaurante = id })
             };
 

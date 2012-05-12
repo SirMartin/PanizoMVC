@@ -13,17 +13,20 @@ namespace PanizoMVC.Controllers
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /Bocadillo/
+        #region Index
 
-        public ViewResult Index()
+        public ViewResult Index(int idRestaurante)
         {
-            var bocadillos = db.Bocadillos.Include("Restaurante");
-            return View(bocadillos.ToList());
+            //Cogemos los bocadillos del restaurante.
+            List<Bocadillo> bocadillos = db.Bocadillos.Include("Restaurante").Where(g=> g.IdRestaurante == idRestaurante).ToList();
+
+            //Los motramos en la vista.
+            return View(bocadillos);
         }
 
-        //
-        // GET: /Bocadillo/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -31,12 +34,13 @@ namespace PanizoMVC.Controllers
             return View(bocadillo);
         }
 
-        //
-        // GET: /Bocadillo/Create
+        #endregion
 
-        public ActionResult Create()
+        #region Create
+
+        public ActionResult Create(int idRestaurante)
         {
-            ViewBag.IdRestaurante = new SelectList(db.Restaurantes, "Id", "Nombre");
+            ViewBag.IdRestaurante = idRestaurante;
             return View();
         } 
 
@@ -56,10 +60,11 @@ namespace PanizoMVC.Controllers
             ViewBag.IdRestaurante = new SelectList(db.Restaurantes, "Id", "Nombre", bocadillo.IdRestaurante);
             return View(bocadillo);
         }
-        
-        //
-        // GET: /Bocadillo/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
@@ -84,9 +89,10 @@ namespace PanizoMVC.Controllers
             return View(bocadillo);
         }
 
-        //
-        // GET: /Bocadillo/Delete/5
- 
+        #endregion
+
+        #region Delete
+
         public ActionResult Delete(int id)
         {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
@@ -110,5 +116,39 @@ namespace PanizoMVC.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
+
+        #region Ultimos
+
+        public ActionResult Ultimos(int idRestaurante)
+        {
+            //Recogemos los 20 restaurantes mas nuevos.
+            List<Bocadillo> bocadillos = db.Bocadillos.Where(g => g.IdRestaurante == idRestaurante).OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+
+            //Los pasamos como modelo.
+            ViewData.Model = bocadillos;
+
+            //Pasamos a la vista.
+            return View();
+        }
+
+        #endregion
+
+        #region Valorados
+
+        public ActionResult Valorados(int idRestaurante)
+        {
+            //Recogemos todos los bocadillos.
+            List<Bocadillo> bocadillos = db.Bocadillos.Where(g => g.IdRestaurante == idRestaurante).ToList();
+
+            //Los pasamos como modelo.
+            ViewData.Model = bocadillos;
+
+            //Pasamos a la vista.
+            return View();
+        }
+
+        #endregion
     }
 }
