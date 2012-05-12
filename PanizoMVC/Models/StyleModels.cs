@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Routing;
 
 namespace PanizoMVC.Models
 {
@@ -21,5 +22,7 @@ namespace PanizoMVC.Models
         public String Action { get; set; }
 
         public String Controller { get; set; }
+
+        public RouteValueDictionary Parameters { get; set; }
     }   
 }
