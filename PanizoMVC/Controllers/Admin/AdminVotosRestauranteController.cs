@@ -13,8 +13,7 @@ namespace PanizoMVC.Controllers.Admin
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /AdminVotosRestaurante/
+        #region Index
 
         public ViewResult Index()
         {
@@ -22,8 +21,9 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosrestaurantes.ToList());
         }
 
-        //
-        // GET: /AdminVotosRestaurante/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -31,22 +31,22 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosrestaurante);
         }
 
-        //
-        // GET: /AdminVotosRestaurante/Create
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
             ViewBag.IdRestaurante = new SelectList(db.Restaurantes, "Id", "Nombre");
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email");
             return View();
-        } 
-
-        //
-        // POST: /AdminVotosRestaurante/Create
+        }
 
         [HttpPost]
         public ActionResult Create(VotosRestaurante votosrestaurante)
         {
+            votosrestaurante.FechaCreacion = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.VotosRestaurantes.AddObject(votosrestaurante);
@@ -58,10 +58,11 @@ namespace PanizoMVC.Controllers.Admin
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", votosrestaurante.IdUsuario);
             return View(votosrestaurante);
         }
-        
-        //
-        // GET: /AdminVotosRestaurante/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             VotosRestaurante votosrestaurante = db.VotosRestaurantes.Single(v => v.Id == id);
@@ -69,9 +70,6 @@ namespace PanizoMVC.Controllers.Admin
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", votosrestaurante.IdUsuario);
             return View(votosrestaurante);
         }
-
-        //
-        // POST: /AdminVotosRestaurante/Edit/5
 
         [HttpPost]
         public ActionResult Edit(VotosRestaurante votosrestaurante)
@@ -88,17 +86,15 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosrestaurante);
         }
 
-        //
-        // GET: /AdminVotosRestaurante/Delete/5
- 
+        #endregion
+
+        #region Delete
+
         public ActionResult Delete(int id)
         {
             VotosRestaurante votosrestaurante = db.VotosRestaurantes.Single(v => v.Id == id);
             return View(votosrestaurante);
         }
-
-        //
-        // POST: /AdminVotosRestaurante/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -114,5 +110,7 @@ namespace PanizoMVC.Controllers.Admin
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion        
     }
 }

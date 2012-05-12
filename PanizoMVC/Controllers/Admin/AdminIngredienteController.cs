@@ -13,8 +13,7 @@ namespace PanizoMVC.Controllers.Admin
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /AdminIngrediente/
+        #region Index
 
         public ViewResult Index()
         {
@@ -22,8 +21,9 @@ namespace PanizoMVC.Controllers.Admin
             return View(ingredientes.ToList());
         }
 
-        //
-        // GET: /AdminIngrediente/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -31,8 +31,9 @@ namespace PanizoMVC.Controllers.Admin
             return View(ingrediente);
         }
 
-        //
-        // GET: /AdminIngrediente/Create
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
@@ -40,12 +41,11 @@ namespace PanizoMVC.Controllers.Admin
             return View();
         } 
 
-        //
-        // POST: /AdminIngrediente/Create
-
         [HttpPost]
         public ActionResult Create(Ingrediente ingrediente)
         {
+            ingrediente.FechaCreacion = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.Ingredientes.AddObject(ingrediente);
@@ -56,19 +56,17 @@ namespace PanizoMVC.Controllers.Admin
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", ingrediente.IdUsuario);
             return View(ingrediente);
         }
-        
-        //
-        // GET: /AdminIngrediente/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             Ingrediente ingrediente = db.Ingredientes.Single(i => i.Id == id);
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", ingrediente.IdUsuario);
             return View(ingrediente);
         }
-
-        //
-        // POST: /AdminIngrediente/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Ingrediente ingrediente)
@@ -84,17 +82,15 @@ namespace PanizoMVC.Controllers.Admin
             return View(ingrediente);
         }
 
-        //
-        // GET: /AdminIngrediente/Delete/5
- 
+        #endregion
+
+        #region Delete
+
         public ActionResult Delete(int id)
         {
             Ingrediente ingrediente = db.Ingredientes.Single(i => i.Id == id);
             return View(ingrediente);
         }
-
-        //
-        // POST: /AdminIngrediente/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -110,5 +106,7 @@ namespace PanizoMVC.Controllers.Admin
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

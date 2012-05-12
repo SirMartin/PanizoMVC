@@ -13,8 +13,7 @@ namespace PanizoMVC.Controllers.Admin
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /AdminVotosBocadillo/
+        #region Index
 
         public ViewResult Index()
         {
@@ -22,8 +21,9 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosbocadillos.ToList());
         }
 
-        //
-        // GET: /AdminVotosBocadillo/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -31,22 +31,22 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosbocadillo);
         }
 
-        //
-        // GET: /AdminVotosBocadillo/Create
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
             ViewBag.IdBocadillo = new SelectList(db.Bocadillos, "Id", "Nombre");
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email");
             return View();
-        } 
-
-        //
-        // POST: /AdminVotosBocadillo/Create
+        }
 
         [HttpPost]
         public ActionResult Create(VotosBocadillo votosbocadillo)
         {
+            votosbocadillo.FechaCreacion = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.VotosBocadillos.AddObject(votosbocadillo);
@@ -58,10 +58,11 @@ namespace PanizoMVC.Controllers.Admin
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", votosbocadillo.IdUsuario);
             return View(votosbocadillo);
         }
-        
-        //
-        // GET: /AdminVotosBocadillo/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             VotosBocadillo votosbocadillo = db.VotosBocadillos.Single(v => v.Id == id);
@@ -69,9 +70,6 @@ namespace PanizoMVC.Controllers.Admin
             ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email", votosbocadillo.IdUsuario);
             return View(votosbocadillo);
         }
-
-        //
-        // POST: /AdminVotosBocadillo/Edit/5
 
         [HttpPost]
         public ActionResult Edit(VotosBocadillo votosbocadillo)
@@ -88,17 +86,15 @@ namespace PanizoMVC.Controllers.Admin
             return View(votosbocadillo);
         }
 
-        //
-        // GET: /AdminVotosBocadillo/Delete/5
- 
+        #endregion
+
+        #region Delete
+
         public ActionResult Delete(int id)
         {
             VotosBocadillo votosbocadillo = db.VotosBocadillos.Single(v => v.Id == id);
             return View(votosbocadillo);
         }
-
-        //
-        // POST: /AdminVotosBocadillo/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -114,5 +110,7 @@ namespace PanizoMVC.Controllers.Admin
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

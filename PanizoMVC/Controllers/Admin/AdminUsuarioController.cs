@@ -13,16 +13,16 @@ namespace PanizoMVC.Controllers.Admin
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /AdminUsuario/
+        #region Index
 
         public ViewResult Index()
         {
             return View(db.Usuarios.ToList());
         }
 
-        //
-        // GET: /AdminUsuario/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -30,20 +30,20 @@ namespace PanizoMVC.Controllers.Admin
             return View(usuario);
         }
 
-        //
-        // GET: /AdminUsuario/Create
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
             return View();
         } 
 
-        //
-        // POST: /AdminUsuario/Create
-
         [HttpPost]
         public ActionResult Create(Usuario usuario)
         {
+            usuario.FechaCreacion = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.Usuarios.AddObject(usuario);
@@ -53,18 +53,16 @@ namespace PanizoMVC.Controllers.Admin
 
             return View(usuario);
         }
-        
-        //
-        // GET: /AdminUsuario/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             Usuario usuario = db.Usuarios.Single(u => u.Id == id);
             return View(usuario);
         }
-
-        //
-        // POST: /AdminUsuario/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Usuario usuario)
@@ -79,17 +77,15 @@ namespace PanizoMVC.Controllers.Admin
             return View(usuario);
         }
 
-        //
-        // GET: /AdminUsuario/Delete/5
- 
+        #endregion
+
+        #region Delete
+
         public ActionResult Delete(int id)
         {
             Usuario usuario = db.Usuarios.Single(u => u.Id == id);
             return View(usuario);
         }
-
-        //
-        // POST: /AdminUsuario/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -105,5 +101,7 @@ namespace PanizoMVC.Controllers.Admin
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }
