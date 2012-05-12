@@ -79,7 +79,7 @@ namespace PanizoMVC.Controllers
                 Titulo = "La carta",
                 Texto = "Consulta aquí todos los bocadillos disponibles en el restaurante en cuestión.",
                 TextoAbajo = "Ver bocadillos",
-                Action = "Index",
+                Action = "Carta",
                 Controller = "Bocadillo",
                 Parameters = new System.Web.Routing.RouteValueDictionary(new { IdRestaurante = id })
             };

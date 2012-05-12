@@ -1,66 +1,53 @@
 ﻿@model PanizoMVC.Bocadillo
-
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2>
-
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+<form id="contactForm" action="@Url.Action("Create", "Bocadillo")" method="post">
+<!-- column (left)-->
+<div class="one-column">
+    <!-- form -->
+    <br />
+    <h2>
+        Nuevo Bocadillo</h2>
+    <br />
     <fieldset>
-        <legend>Bocadillo</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IdRestaurante, "Restaurante")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdRestaurante", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdRestaurante)
-        </div>
-
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(model => model.Nombre)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-poshytip", title = "Introduce el nombre del bocadillo", tabindex = 1 })
             @Html.ValidationMessageFor(model => model.Nombre)
         </div>
-
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(model => model.Descripcion)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Descripcion)
+            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-poshytip", title = "Una breve descripción", rows = "5", cols = "20", tabindex = 2 })
             @Html.ValidationMessageFor(model => model.Descripcion)
         </div>
-
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(model => model.Precio)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Precio)
+            @Html.TextBoxFor(model => model.Precio, new { @class = "form-poshytip", title = "Introduce el precio del bocadillo", tabindex = 3 })
             @Html.ValidationMessageFor(model => model.Precio)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FechaCreacion)
+        <div>
+            @Html.Hidden("IdRestaurante", ViewData["IdRestaurante"])
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FechaCreacion)
-            @Html.ValidationMessageFor(model => model.FechaCreacion)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
     </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <p>
+        <input type="submit" value="AÑADIR" name="submit" id="submit" tabindex="9" title="Añadir Bocadillo" /></p>
+    <p id="error" class="warning">
+        Message</p>
+    <p id="success" class="success">
+        Thanks for your comments.</p>
+    <!-- ENDS form -->
 </div>
+<!-- ENDS column -->
+<!-- column (right)-->
+<div class="one-column">
+    <br />
+    <h2>
+        &nbsp;</h2>
+    <br />
+</div>
+<!-- ENDS column -->
+</form>

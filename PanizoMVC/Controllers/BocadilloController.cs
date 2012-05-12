@@ -15,10 +15,23 @@ namespace PanizoMVC.Controllers
 
         #region Index
 
-        public ViewResult Index(int idRestaurante)
+        public ViewResult Index()
         {
             //Cogemos los bocadillos del restaurante.
-            List<Bocadillo> bocadillos = db.Bocadillos.Include("Restaurante").Where(g=> g.IdRestaurante == idRestaurante).ToList();
+            List<Bocadillo> bocadillos = db.Bocadillos.Include("Restaurante").ToList();
+
+            //Los motramos en la vista.
+            return View(bocadillos);
+        }
+
+        #endregion
+
+        #region Carta
+
+        public ViewResult Carta(int idRestaurante)
+        {
+            //Cogemos los bocadillos del restaurante.
+            List<Bocadillo> bocadillos = db.Bocadillos.Include("Restaurante").Where(g => g.IdRestaurante == idRestaurante).ToList();
 
             //Los motramos en la vista.
             return View(bocadillos);
@@ -40,24 +53,28 @@ namespace PanizoMVC.Controllers
 
         public ActionResult Create(int idRestaurante)
         {
-            ViewBag.IdRestaurante = idRestaurante;
+            ViewData["IdRestaurante"] = idRestaurante;
             return View();
         } 
 
-        //
-        // POST: /Bocadillo/Create
-
         [HttpPost]
-        public ActionResult Create(Bocadillo bocadillo)
+        public ActionResult Create(Bocadillo bocadillo, FormCollection collection)
         {
+            //Rellenamos el idRestaurante.
+            bocadillo.IdRestaurante = Convert.ToInt32(collection["IdRestaurante"]);
+            //Añadimos la fecha actual como creación.
+            bocadillo.FechaCreacion = DateTime.Now;
+
+            //Comprobamos si el modelo es valido y lo guardamos.
             if (ModelState.IsValid)
             {
                 db.Bocadillos.AddObject(bocadillo);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Carta", new { idRestaurante = bocadillo.IdRestaurante });  
             }
 
-            ViewBag.IdRestaurante = new SelectList(db.Restaurantes, "Id", "Nombre", bocadillo.IdRestaurante);
+            //Si hay algún fallo volvemos.
+            ViewData["IdRestaurante"] = collection["IdRestaurante"];
             return View(bocadillo);
         }
 
