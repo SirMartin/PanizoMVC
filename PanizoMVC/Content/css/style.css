@@ -614,3 +614,10 @@ h6
     background: url(../style/to-top.png) no-repeat;
     cursor: pointer;
 }
+
+/* Creadas por mi */
+
+.fixcolumn
+{
+    float: left;
+}
