@@ -2,8 +2,12 @@
 <li><a href="@Url.Action(Model.Action, Model.Controller, Model.Parameters)" class="thumb" title="@Model.Titulo">
     <img src="@Model.UrlImage" alt="Post" /></a>
     <div>
-        @Html.ActionLink(Model.Titulo, Model.Action, Model.Controller, Model.Parameters, new { @class = "header" })
+        @{
+            Dictionary<string, object> dicHtml = new Dictionary<string, object>();
+            dicHtml.Add("class", "header");
+        }
+        @Html.ActionLink(Model.Titulo, Model.Action, Model.Controller, Model.Parameters, dicHtml)
         @Model.Texto
     </div>
-    <a href="@Url.Action(Model.Action, Model.Controller, Model.Parameters)">@Model.TextoAbajo &#8594;</a>
-</li>
+    <a href="@Url.Action(Model.Action, Model.Controller, Model.Parameters)">@Model.TextoAbajo
+        &#8594;</a> </li>
