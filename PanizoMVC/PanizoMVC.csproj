@@ -918,6 +918,8 @@
     <None Include="Content\style\social-icons\circular\.DS_Store" />
     <None Include="Content\style\social-icons\rounded\.DS_Store" />
     <Content Include="Views\Shared\PartialColumn.cshtml" />
+    <Content Include="Views\Restaurante\Todos.cshtml" />
+    <Content Include="Views\Restaurante\Ultimos.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

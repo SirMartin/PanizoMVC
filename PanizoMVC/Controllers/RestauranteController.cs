@@ -14,8 +14,7 @@ namespace PanizoMVC.Controllers
     {
         private EntrepanDB db = new EntrepanDB();
 
-        //
-        // GET: /Restaurante/
+        #region Index
 
         public ViewResult Index()
         {
@@ -24,7 +23,7 @@ namespace PanizoMVC.Controllers
             {
                 UrlImage = "http://lorempixel.com/282/150/food/1",
                 Titulo = "Añade tu restaurante",
-                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                Texto = "Has descubierto un nuevo restaurante que quieres compartir con todos nosotros, hazlo desde aquí.",
                 TextoAbajo = "Añadir Restaurante",
                 Action = "Create",
                 Controller = "Restaurante"
@@ -37,7 +36,7 @@ namespace PanizoMVC.Controllers
             {
                 UrlImage = "http://lorempixel.com/282/150/food/3",
                 Titulo = "Los + Valorados",
-                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                Texto = "Aquí encontraras el top de restaurantes según vuestros propios votos. No olvides votar a tus favoritos.",
                 TextoAbajo = "Ver los mas valorados",
                 //Action = "Valorados",
                 //Controller = "Restaurante"
@@ -52,7 +51,7 @@ namespace PanizoMVC.Controllers
             {
                 UrlImage = "http://lorempixel.com/282/150/food/7",
                 Titulo = "Los últimos en llegar",
-                Texto = "Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. ultricies eget, tempor sit amet, ante. Mauris placerat eleifend leo.",
+                Texto = "Quieres ver los últimos restaurante que la gente ha descubierto. Aquí puedes ver las últimas novedades en entrepan.",
                 TextoAbajo = "Nuevos Restaurantes",
                 Action = "Ultimos",
                 Controller = "Restaurante"
@@ -64,8 +63,9 @@ namespace PanizoMVC.Controllers
             return View(restaurantes.ToList());
         }
 
-        //
-        // GET: /Restaurante/Details/5
+        #endregion
+
+        #region Details
 
         public ViewResult Details(int id)
         {
@@ -73,8 +73,9 @@ namespace PanizoMVC.Controllers
             return View(restaurante);
         }
 
-        //
-        // GET: /Restaurante/Create
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
@@ -101,10 +102,11 @@ namespace PanizoMVC.Controllers
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre", restaurante.IdCiudad);
             return View(restaurante);
         }
-        
-        //
-        // GET: /Restaurante/Edit/5
- 
+
+        #endregion
+
+        #region Edit
+
         public ActionResult Edit(int id)
         {
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
@@ -128,6 +130,10 @@ namespace PanizoMVC.Controllers
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre", restaurante.IdCiudad);
             return View(restaurante);
         }
+
+        #endregion
+
+        #region Delete
 
         //
         // GET: /Restaurante/Delete/5
@@ -155,5 +161,39 @@ namespace PanizoMVC.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
+
+        #region Todos
+
+        public ActionResult Todos()
+        {
+            //Recogemos todos los restaurantes.
+            List<Restaurante> restaurantes = db.Restaurantes.ToList();
+
+            //Los pasamos como modelo.
+            ViewData.Model = restaurantes;
+
+            //Pasamos a la vista.
+            return View();
+        }
+
+        #endregion
+
+        #region Ultimos
+
+        public ActionResult Ultimos()
+        {
+            //Recogemos los 20 restaurantes mas nuevos.
+            List<Restaurante> restaurantes = db.Restaurantes.OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+
+            //Los pasamos como modelo.
+            ViewData.Model = restaurantes;
+
+            //Pasamos a la vista.
+            return View();
+        }
+
+        #endregion
     }
 }
