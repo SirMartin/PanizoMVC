@@ -86,7 +86,7 @@
 				value = jQuery.trim(value);
 		
 				if (options.unique) {
-					var skipTag = $(this).tagExist(value);
+					var skipTag = $(tagslist).tagExist(value);
 					if(skipTag == true) {
 					    //Marks fake input as not_valid to let styling it
     				    $('#'+id+'_tag').addClass('not_valid');
@@ -162,9 +162,7 @@
 		};
 	
 	$.fn.tagExist = function(val) {
-		var id = $(this).attr('id');
-		var tagslist = $(this).val().split(delimiter[id]);
-		return (jQuery.inArray(val, tagslist) >= 0); //true when tag exists, false when not
+		return (jQuery.inArray(val, $(this)) >= 0); //true when tag exists, false when not
 	};
 	
 	// clear all existing tags and import new ones from a string
@@ -196,10 +194,8 @@
 			if (settings.hide) { 
 				$(this).hide();				
 			}
-			var id = $(this).attr('id');
-			if (!id || delimiter[$(this).attr('id')]) {
-				id = $(this).attr('id', 'tags' + new Date().getTime()).attr('id');
-			}
+				
+			var id = $(this).attr('id')
 			
 			var data = jQuery.extend({
 				pid:id,
@@ -229,8 +225,7 @@
 			$(markup).insertAfter(this);
 
 			$(data.holder).css('width',settings.width);
-			$(data.holder).css('min-height',settings.height);
-			$(data.holder).css('height','100%');
+			$(data.holder).css('height',settings.height);
 	
 			if ($(data.real_input).val()!='') { 
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
@@ -320,12 +315,13 @@
 				//Removes the not_valid class when user changes the value of the fake input
 				if(data.unique) {
 				    $(data.fake_input).keydown(function(event){
-				        if(event.keyCode == 8 || String.fromCharCode(event.which).match(/\w+|[Ã¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘,/]+/)) {
+				        if(event.keyCode == 8 || String.fromCharCode(event.which).match(/\w+|[áéíóúÁÉÍÓÚñÑ,/]+/)) {
 				            $(this).removeClass('not_valid');
 				        }
 				    });
 				}
 			} // if settings.interactive
+			return false;
 		});
 			
 		return this;
