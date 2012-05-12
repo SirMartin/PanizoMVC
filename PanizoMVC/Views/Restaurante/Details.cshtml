@@ -4,37 +4,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- column (left)-->
-<div class="one-column">
-    <h2>@Model.Nombre</h2>
-    <fieldset>
-        <div>
-            <label>
-                Teléfono:</label><h6>@Model.Telefono</h6>
-        </div>
-        <div>
-            <label>
-                Email:</label><h6>@Model.Email</h6>
-        </div>
-        <div>
-            <label>
-                Página Web:</label><h6>@Model.Web</h6>
-        </div>
-        <div>
-            <label>
-                Dirección:</label><h6>@Model.Direccion
-                    <br />
-                    @Model.CP @Model.Ciudad.Nombre</h6>
-        </div>
-    </fieldset>
-</div>
-<!-- column (right)-->
-<div class="one-column">
-    <!-- content -->
-    <div id="map_canvas" style="width: 438px; height: 267px;">
+<div>
+    <div class="one-column">
+        <h2>@Model.Nombre</h2>
+        <fieldset>
+            <div>
+                <label>
+                    Teléfono:</label><h6>@Model.Telefono</h6>
+            </div>
+            <div>
+                <label>
+                    Email:</label><h6>@Model.Email</h6>
+            </div>
+            <div>
+                <label>
+                    Página Web:</label><h6>
+                        <a target="_blank" href="@Model.Web">Visitar web oficial</a></h6>
+            </div>
+            <div>
+                <label>
+                    Dirección:</label><h6>@Model.Direccion
+                        <br />
+                        @Model.CP @Model.Ciudad.Nombre</h6>
+            </div>
+        </fieldset>
     </div>
-    <p>@Model.Descripcion</p>
-    <p>
-        Registrado desde @Model.FechaCreacion.ToShortDateString()</p>
+    <!-- column (right)-->
+    <div class="one-column">
+        <!-- content -->
+        <div id="map_canvas" style="width: 438px; height: 267px;">
+        </div>
+        <p>@Model.Descripcion</p>
+        <p>
+            Registrado desde @Model.FechaCreacion.ToShortDateString()</p>
+    </div>
+</div>
+<div class="fixcolumn panes">
+    <ul class="blocks-thumbs thumbs-rollover">
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column1)
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column2)
+        @Html.Partial("PartialColumn", (PanizoMVC.Models.ColumnModel)ViewBag.Column3)
+    </ul>
 </div>
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">

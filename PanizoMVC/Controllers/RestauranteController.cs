@@ -69,7 +69,54 @@ namespace PanizoMVC.Controllers
 
         public ViewResult Details(int id)
         {
+            //Cogemos la información del restaurante.
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
+
+            //Creamos un modelo de columna.
+            ColumnModel col1 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/1",
+                Titulo = "La carta",
+                Texto = "Consulta aquí todos los bocadillos disponibles en el restaurante en cuestión.",
+                TextoAbajo = "Ver bocadillos",
+                Action = "Index",
+                Controller = "Bocadillo",
+                Parameters = new System.Web.Routing.RouteValueDictionary(new { IdRestaurante = id })
+            };
+
+            ViewBag.Column1 = col1;
+
+            //Creamos un modelo de columna.
+            ColumnModel col2 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/3",
+                Titulo = "Los + Valorados",
+                Texto = "Aquí encontraras el top de los bocadillos del restaurante. Las especialidades del sitio.",
+                TextoAbajo = "Ver los mas valorados",
+                //Action = "Valorados",
+                //Controller = "Bocadillo"
+                Action = "Index",
+                Controller = "AdminBocadillo",
+                Parameters = new System.Web.Routing.RouteValueDictionary(new { IdRestaurante = id })
+            };
+
+            ViewBag.Column2 = col2;
+
+            //Creamos un modelo de columna.
+            ColumnModel col3 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/7",
+                Titulo = "Añadir Bocadillo",
+                Texto = "Has estado por aquí y has probado un bocadillo del que nadie ha hablado, es tu oportunidad.",
+                TextoAbajo = "Bocata nuevo",
+                Action = "Create",
+                Controller = "Bocadillo",
+                Parameters = new System.Web.Routing.RouteValueDictionary(new { IdRestaurante = id })
+            };
+
+            ViewBag.Column3 = col3;
+
+            //Mostramos la vista.
             return View(restaurante);
         }
 
