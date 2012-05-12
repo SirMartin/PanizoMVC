@@ -37,13 +37,14 @@ namespace PanizoMVC.Controllers.Admin
 
         public ActionResult Create()
         {
-            ViewBag.IdUsuario = new SelectList(db.Usuarios, "Id", "Email");
             return View();
         } 
 
         [HttpPost]
         public ActionResult Create(Ingrediente ingrediente)
         {
+            ingrediente.IdUsuario = 7;
+            //Añadimos la fecha de creación.
             ingrediente.FechaCreacion = DateTime.Now;
 
             if (ModelState.IsValid)

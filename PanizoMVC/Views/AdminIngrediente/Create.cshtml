@@ -16,14 +16,6 @@
         <legend>Ingrediente</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IdUsuario, "Usuario")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("IdUsuario", String.Empty)
-            @Html.ValidationMessageFor(model => model.IdUsuario)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.Nombre)
         </div>
         <div class="editor-field">
@@ -35,7 +27,7 @@
             @Html.LabelFor(model => model.Descripcion)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Descripcion)
+            @Html.TextAreaFor(model => model.Descripcion)
             @Html.ValidationMessageFor(model => model.Descripcion)
         </div>
 
