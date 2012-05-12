@@ -24,5 +24,12 @@ namespace PanizoMVC.Models
         public String Controller { get; set; }
 
         public RouteValueDictionary Parameters { get; set; }
-    }   
+    }
+
+    public class TagIngrediente
+    {
+        public String label { get; set; }
+
+        public String value { get; set; }
+    }
 }
