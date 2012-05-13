@@ -19,20 +19,14 @@ namespace PanizoMVC.Controllers
             //Recuperamos de BBDD los ingredientes.
             List<Ingrediente> ingredientes = db.Ingredientes.ToList();
 
-            List<TagIngrediente> lista = new List<TagIngrediente>();
+            List<String> lis = new List<string>();
             foreach (Ingrediente item in ingredientes)
             {
-                TagIngrediente tag = new TagIngrediente()
-                {
-                    label = item.Nombre,
-                    value = item.Descripcion
-                };
-                lista.Add(tag);
+                lis.Add(item.Nombre);
             }
-            String con = "hola\ncosa\npedo\n\noceh";
+
             //Devolvemos el resultado por JSON.
-            //return Json(con, JsonRequestBehavior.AllowGet);
-            return Content(con);
+            return Json(lis, JsonRequestBehavior.AllowGet);
         }
     }
 }
