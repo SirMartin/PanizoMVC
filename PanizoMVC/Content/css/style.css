@@ -95,7 +95,12 @@ body
     font-size: 15pt;
 }
 
-#content a
+/*#content a
+{
+    color: #37b2d1;
+}*/
+
+a
 {
     color: #37b2d1;
 }
@@ -627,4 +632,87 @@ h6
 .fixcolumn
 {
     float: left;
+}
+
+/* Boton de login con Facebook */
+
+.FacebookLogInBtn
+{
+    background-color: #3B5998;
+    width: 400px;
+    height: 70px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    color: White;
+    padding-left: 20px;
+    margin-top: 20px;
+    font-family: 'Ubuntu' , arial, serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.FacebookLogInBtn p
+{
+    background: url(../style/social-icons/rounded/facebook_32.png) no-repeat;
+    background-position: left center;
+    color: White;
+    height: 100%;
+}
+
+
+.FacebookLogInBtn a
+{
+    color: White;
+    text-decoration: none;
+    position: relative;
+    top: 22px;
+}
+
+.FacebookLogInBtn a:hover
+{
+    color: #CCC;
+    text-decoration: none;
+}
+
+
+/* Boton de login con Twitter */
+
+.TwitterLogInBtn
+{
+    background: #6DC1F5;
+    width: 400px;
+    height: 70px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    text-align: center;
+    color: White;
+    padding-left: 20px;
+    font-family: 'Ubuntu' , arial, serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.TwitterLogInBtn p
+{
+    background: url(../images/twitter_connect.png) no-repeat no-repeat left;
+    background-position: left center;
+    color: White;
+    height: 100%;
+}
+
+.TwitterLogInBtn a
+{
+    color: White;
+    text-decoration: none;
+    position: relative;
+    top: 22px;
+}
+
+.TwitterLogInBtn a:hover
+{
+    color: #CCC;
+    text-decoration: none;
 }
