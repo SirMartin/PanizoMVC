@@ -1515,11 +1515,13 @@ namespace PanizoMVC
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="fechaCreacion">Initial value of the FechaCreacion property.</param>
-        public static Usuario CreateUsuario(global::System.Int32 id, global::System.DateTime fechaCreacion)
+        /// <param name="isAdmin">Initial value of the IsAdmin property.</param>
+        public static Usuario CreateUsuario(global::System.Int32 id, global::System.DateTime fechaCreacion, global::System.Boolean isAdmin)
         {
             Usuario usuario = new Usuario();
             usuario.Id = id;
             usuario.FechaCreacion = fechaCreacion;
+            usuario.IsAdmin = isAdmin;
             return usuario;
         }
 
@@ -1744,6 +1746,30 @@ namespace PanizoMVC
         private global::System.String _FacebookId;
         partial void OnFacebookIdChanging(global::System.String value);
         partial void OnFacebookIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsAdmin
+        {
+            get
+            {
+                return _IsAdmin;
+            }
+            set
+            {
+                OnIsAdminChanging(value);
+                ReportPropertyChanging("IsAdmin");
+                _IsAdmin = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsAdmin");
+                OnIsAdminChanged();
+            }
+        }
+        private global::System.Boolean _IsAdmin;
+        partial void OnIsAdminChanging(global::System.Boolean value);
+        partial void OnIsAdminChanged();
 
         #endregion
     

@@ -120,6 +120,7 @@
           <Property Name="TwitterAccessKey" Type="nvarchar(max)" />
           <Property Name="TwitterUserId" Type="nvarchar" MaxLength="50" />
           <Property Name="FacebookId" Type="nvarchar(max)" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="VotosBocadillo">
           <Key>
@@ -398,6 +399,7 @@
           <Property Type="String" Name="TwitterAccessKey" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TwitterUserId" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FacebookId" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="false" />
         </EntityType>
         <EntityType Name="VotosBocadillo">
           <Key>
@@ -589,7 +591,8 @@
             <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Usuarios"><EntityTypeMapping TypeName="DB_37268_panizoModel.Usuario"><MappingFragment StoreEntitySet="Usuario">
-            <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+            <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
                 <ScalarProperty Name="TwitterUserId" ColumnName="TwitterUserId" />
                 <ScalarProperty Name="TwitterAccessKey" ColumnName="TwitterAccessKey" />
                 <ScalarProperty Name="TwitterAccessSecret" ColumnName="TwitterAccessSecret" />
