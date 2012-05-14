@@ -27,12 +27,12 @@
         </div>
         <div>
             @Html.LabelFor(model => model.Password)
-            @Html.TextBoxFor(model => model.Password, new { @class = "form-poshytip", title = "La contraseña debe tener un mínimo de " + Membership.MinRequiredPasswordLength + "carácteres de longitud.", tabindex = 3 })
+            @Html.PasswordFor(model => model.Password, new { @class = "form-poshytip", title = "La contraseña debe tener un mínimo de " + Membership.MinRequiredPasswordLength + "carácteres de longitud.", tabindex = 3 })
             @Html.ValidationMessageFor(model => model.Password)
         </div>
         <div>
             @Html.LabelFor(model => model.ConfirmPassword)
-            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-poshytip", title = "Repite la contraseña.", tabindex = 4 })
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-poshytip", title = "Repite la contraseña.", tabindex = 4 })
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
         <div>

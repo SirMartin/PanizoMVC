@@ -7,11 +7,14 @@ using System.Web.Routing;
 using System.Web.Security;
 using PanizoMVC.Models;
 using PanizoMVC.Utilities;
+using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {
     public class AccountController : BaseController
     {
+        private EntrepanDB db = new EntrepanDB();
+        EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
 
         //
         // GET: /Account/LogOn
@@ -29,9 +32,10 @@ namespace PanizoMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (EntrepanMembership.ValidateUser(model.Email, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    Usuario user = EntrepanMembership.GetUserByEmail(model.Email);
+                    EntrepanMembership.LogInUser(model.Email, user.Id, user.Nick, user.IsAdmin, true);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -44,7 +48,7 @@ namespace PanizoMVC.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", "El nombre de usuario o la contraseña es incorrecto.");
                 }
             }
 
@@ -79,12 +83,12 @@ namespace PanizoMVC.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
+                MembershipCreateStatus createStatus = EntrepanMembership.CreateUser(model.Email, model.Password, model.Nick);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    Usuario user = EntrepanMembership.GetUserByEmail(model.Email);
+                    EntrepanMembership.LogInUser(model.Email, user.Id, user.Nick, user.IsAdmin, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
