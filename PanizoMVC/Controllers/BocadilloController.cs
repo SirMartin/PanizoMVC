@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PanizoMVC;
+using PanizoMVC.Utilities;
 
 namespace PanizoMVC.Controllers
 {
@@ -55,7 +56,7 @@ namespace PanizoMVC.Controllers
         {
             ViewData["IdRestaurante"] = idRestaurante;
             return View();
-        } 
+        }
 
         [HttpPost]
         public ActionResult Create(Bocadillo bocadillo, FormCollection collection)
@@ -70,7 +71,24 @@ namespace PanizoMVC.Controllers
             {
                 db.Bocadillos.AddObject(bocadillo);
                 db.SaveChanges();
-                return RedirectToAction("Carta", new { idRestaurante = bocadillo.IdRestaurante });  
+
+                //Recuperamos los ingredientes que se han puesto.
+                String ingredientesStr = collection["hdnTags"];
+                //Lo separamos los ingredientes, quitando antes la coma del final.
+                ingredientesStr = ingredientesStr.Substring(0, ingredientesStr.Length - 1);
+                List<String> ingredientesList = ingredientesStr.Split(',').ToList();
+                //Hacemos el manejo necesario con los ingredientes.
+                IngredientesUtilities ingreUtilities = new IngredientesUtilities();
+                List<BocadilloIngrediente> ingredientesBocadillo = ingreUtilities.ManageIngredientes(ingredientesList, bocadillo.Id);
+
+                //Agregamos los ingredientes al bocadillo.
+                foreach (BocadilloIngrediente item in ingredientesBocadillo)
+                {
+                    bocadillo.BocadilloIngrediente.Add(item);
+                }
+                db.SaveChanges();
+
+                return RedirectToAction("Carta", new { idRestaurante = bocadillo.IdRestaurante });
             }
 
             //Si hay algún fallo volvemos.
@@ -121,7 +139,7 @@ namespace PanizoMVC.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
-        {            
+        {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
             db.Bocadillos.DeleteObject(bocadillo);
             db.SaveChanges();

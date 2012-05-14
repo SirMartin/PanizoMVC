@@ -130,6 +130,7 @@
     <Compile Include="Repositorys\IngredienteRepository.cs" />
     <Compile Include="Repositorys\RestauranteRepository.cs" />
     <Compile Include="Repositorys\UsuarioRepository.cs" />
+    <Compile Include="Utilities\IngredientesUtilities.cs" />
     <Compile Include="Utilities\OAuthTokenResponse.cs" />
     <Compile Include="Utilities\OAuthUtility.cs" />
   </ItemGroup>
