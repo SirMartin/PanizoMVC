@@ -69,11 +69,10 @@
 
     $('#addIngrediente').bind('click', function (e) {
         //Comprobamos que no este añadido ya.
-        var existsTag = ExistsTag($('#tagname').val());
-        $('#tagsIngredientes').importTags($('#tagname').val());
+        var existsTag = $('#tagsIngredientes').tagExist($('#tagname').val());
         //Lo añadimos a los tags. Si no existe ya.
         if (existsTag == false) {
-            $('#textarea').textext()[0].tags().addTags([$('#tagname').val()]);
+            $('#tagsIngredientes').addTag($('#tagname').val());
             //Lo añadimos al hidden.
             var hdn = $("#hdnTags").val();
             $("#hdnTags").val(hdn + $('#tagname').val() + ",")
@@ -82,29 +81,19 @@
         $('#tagname').val('');
     });
 
-    function ExistsTag(newTag) {
-        var tags = $("#hdnTags").val();
-        var tagsArray = tags.split(",");
-        for (i in tagsArray) {
-            //Cogemos el tag. Y comprobamos si ya existe.
-            var tag = tagsArray[i];
-            if (tag == newTag) {
-                return true;
-            }
-        }
-        //Por tanto devolvemos FALSE.
-        return false;
-    }
-
     function onRemoveTag(tag) {
-        alert("Removed a tag: " + tag);
+        //Quitamos el tag en cuestión.
+        var tags = $("#hdnTags").val();
+        tags = tags.replace(tag + ",","");
+        $("#hdnTags").val(tags);
     }
 
-    $(function () {
-        $('#tagsIngredientes').tagsInput({
-            width: '350px',
-            onRemoveTag: onRemoveTag
-        });
+    $('#tagsIngredientes').tagsInput({
+        width: '350px',
+        height: '40px',
+        onRemoveTag: onRemoveTag,
+        interactive : false,
+        removeWithBackspace : false,
     });
 	
 </script>
