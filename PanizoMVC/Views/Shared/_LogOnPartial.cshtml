@@ -1,8 +1,13 @@
-﻿@if(Request.IsAuthenticated) {
-    <text>Hola <strong>@User.Identity.Name</strong>!
-    [ @Html.ActionLink("Salir", "LogOff", "Account") ]</text>
+﻿@{bool isAdmin = false;}
+@if (Request.IsAuthenticated)
+{
+    String[] arrayIdentity = User.Identity.Name.Split(PanizoMVC.Utilities.Constants.IdentitySeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+    string username = arrayIdentity[2];
+    <text>Hola <strong>@username</strong> [ @Html.ActionLink("Salir", "LogOff", "Account")
+    ]</text>
 }
-else {
+else
+{
     @: @Html.ActionLink("Acceder", "LogOn", "Account") |
-    @: @Html.ActionLink("Registrate", "Register", "Account") 
+    @: @Html.ActionLink("Registrate", "Register", "Account")
 }
