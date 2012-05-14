@@ -120,6 +120,8 @@
     <Compile Include="Interfaces\IIngredientesRep.cs" />
     <Compile Include="Interfaces\IUsuarioRep.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Security\AuthorizationAttributes.cs" />
+    <Compile Include="Models\Security\EntrepanMembershipProvider.cs" />
     <Compile Include="Models\StyleModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorys\BaseRepository.cs" />
@@ -130,12 +132,14 @@
     <Compile Include="Repositorys\IngredienteRepository.cs" />
     <Compile Include="Repositorys\RestauranteRepository.cs" />
     <Compile Include="Repositorys\UsuarioRepository.cs" />
+    <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\IngredientesUtilities.cs" />
     <Compile Include="Utilities\OAuthTokenResponse.cs" />
     <Compile Include="Utilities\OAuthUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\ie8-hacks.css" />
+    <Content Include="Content\css\jquery.tagsinput.css" />
     <Content Include="Content\css\nivo-slider.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\css\skinned-select.css" />
@@ -706,6 +710,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.tagsinput.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
