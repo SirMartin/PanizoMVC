@@ -42,11 +42,19 @@
 </script>
 @Html.Hidden("hdnTags", "Basic,JavaScript,PHP,Scala")
 *@
-<textarea id="textarea" class="example" rows="1"></textarea>
-
-<div style="margin-top: 20px">
-	<input type="text" id="tagname" placeholder="Escribe el ingrediente" />
-	<button id="addtag" class="btn">Añadir Ingrediente</button>
+<div>
+    @Html.Label("Ingredientes")
+    @*@Html.TextArea("textarea", null, 1, 1, new { @class = "form-poshytip", title = "Agrega ingredientes", tabindex = 1 })*@
+    <textarea id="textarea" rows="5" cols="5" style="width: 400px;"></textarea>
+    <div style="margin-top: 20px">
+    <div style="float:left;">
+        <input type="text" id="tagname" placeholder="Escribe el ingrediente" style="width: 210px;" />
+        </div>
+        <div style="position:relative;top:-10px;left:220px;">
+        <input type="button" value="Añadir Ingrediente" name="addIngrediente" id="addIngrediente"
+            tabindex="9" title="Añadir Ingrediente" />
+            </div>
+    </div>
 </div>
 <script type="text/javascript">
     $('#tagname').textext({
@@ -60,8 +68,32 @@
 
     $('#textarea').textext({ plugins: 'tags' });
 
-    $('#addtag').bind('click', function (e) {
-        $('#textarea').textext()[0].tags().addTags([$('#tagname').val()]);
+    $('#addIngrediente').bind('click', function (e) {
+        //Comprobamos que no este añadido ya.
+        var existsTag = ExistsTag($('#tagname').val());
+        //Lo añadimos a los tags. Si no existe ya.
+        if (existsTag == false) {
+            $('#textarea').textext()[0].tags().addTags([$('#tagname').val()]);
+            //Lo añadimos al hidden.
+            var hdn = $("#hdnTags").val();
+            $("#hdnTags").val(hdn + $('#tagname').val() + ",")
+        }
+        //Limpiamos el valor del textbox de nuevo ingrediente.
         $('#tagname').val('');
     });
+
+    function ExistsTag(newTag) {
+        var tags = $("#hdnTags").val();
+        var tagsArray = tags.split(",");
+        for (i in tagsArray) {
+            //Cogemos el tag. Y comprobamos si ya existe.
+            var tag = tagsArray[i];
+            if (tag == newTag) {
+                return true;
+            }
+        }
+        //Por tanto devolvemos FALSE.
+        return false;
+    }
 </script>
+@Html.Hidden("hdnTags")
