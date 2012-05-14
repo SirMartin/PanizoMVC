@@ -1,5 +1,6 @@
-﻿<script src="http://bundlejs.com/alexgorbatchev/products/textext/1.3.0?compress=true&bundles=core,ajax,arrow,autocomplete,filter,focus,prompt,suggestions,tags"
-    type="text/javascript" charset="utf-8"></script>
+﻿<script src="@Url.Content("~/Scripts/textext.js")" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.css" />
+<script type="text/javascript" src="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.js"></script>
 @*<textarea id="tagsIngredientes" rows="5" cols="5" style="width: 400px;"></textarea>
 <script type="text/javascript">
     $('#tagsIngredientes').textext({
@@ -44,16 +45,16 @@
 *@
 <div>
     @Html.Label("Ingredientes")
-    @*@Html.TextArea("textarea", null, 1, 1, new { @class = "form-poshytip", title = "Agrega ingredientes", tabindex = 1 })*@
-    <textarea id="textarea" rows="5" cols="5" style="width: 400px;"></textarea>
+    <input id='tagsIngredientes' type='text' class='tags'>
+    @*<textarea id="textarea" rows="5" cols="5" style="width: 400px;"></textarea>*@
     <div style="margin-top: 20px">
-    <div style="float:left;">
-        <input type="text" id="tagname" placeholder="Escribe el ingrediente" style="width: 210px;" />
+        <div style="float: left;">
+            <input type="text" id="tagname" placeholder="Escribe el ingrediente" style="width: 210px;" />
         </div>
-        <div style="position:relative;top:-10px;left:220px;">
-        <input type="button" value="Añadir Ingrediente" name="addIngrediente" id="addIngrediente"
-            tabindex="9" title="Añadir Ingrediente" />
-            </div>
+        <div style="position: relative; top: -10px; left: 220px;">
+            <input type="button" value="Añadir Ingrediente" name="addIngrediente" id="addIngrediente"
+                tabindex="9" title="Añadir Ingrediente" />
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -66,11 +67,10 @@
         }
     });
 
-    $('#textarea').textext({ plugins: 'tags' });
-
     $('#addIngrediente').bind('click', function (e) {
         //Comprobamos que no este añadido ya.
         var existsTag = ExistsTag($('#tagname').val());
+        $('#tagsIngredientes').importTags($('#tagname').val());
         //Lo añadimos a los tags. Si no existe ya.
         if (existsTag == false) {
             $('#textarea').textext()[0].tags().addTags([$('#tagname').val()]);
@@ -95,5 +95,17 @@
         //Por tanto devolvemos FALSE.
         return false;
     }
+
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    $(function () {
+        $('#tagsIngredientes').tagsInput({
+            width: '350px',
+            onRemoveTag: onRemoveTag
+        });
+    });
+	
 </script>
 @Html.Hidden("hdnTags")
