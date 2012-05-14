@@ -521,7 +521,14 @@ h6
     padding: 5px 0px;
 }
 
-#sc-contact-form #submit:hover, .admin-form #submit:hover, #contactForm #submit:hover, #commentform input#submit:hover
+#contactForm #addIngrediente
+{
+    width: 135px;
+    margin: 21px 0px;
+    padding: 5px 0px;
+}
+
+#sc-contact-form #submit:hover, .admin-form #submit:hover, #contactForm #submit:hover, #commentform input#submit:hover, #contactForm #addIngrediente:hover
 {
     background: #f1f1f1;
     color: #606060;
