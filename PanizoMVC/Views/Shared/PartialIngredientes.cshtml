@@ -1,48 +1,6 @@
 ﻿<script src="@Url.Content("~/Scripts/textext.js")" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.css" />
-<script type="text/javascript" src="http://xoxco.com/projects/code/tagsinput/jquery.tagsinput.js"></script>
-@*<textarea id="tagsIngredientes" rows="5" cols="5" style="width: 400px;"></textarea>
-<script type="text/javascript">
-    $('#tagsIngredientes').textext({
-        plugins: 'tags prompt autocomplete ajax',
-        tagsItems: ['Basic', 'JavaScript', 'PHP', 'Scala'],
-        prompt: 'Añadir Ingrediente',
-        ajax: {
-            url: '/Ingredientes',
-            dataType: 'json',
-            cacheResults: true
-        }
-    })
-    .bind('isTagAllowed', function (e, data) {
-        //Comprobamos si ya existe.
-        var exists = ExistsTag(data.tag);
-        //Ponemos si es valido o no según la comprobación.
-        data.result = exists;
-        alert("HOLA");
-    });
-</script>
-<script type="text/javascript">
-    function ExistsTag(newTag) {
-        var tags = $("#hdnTags").val();
-        alert("TAGS: " + tags);
-        var tagsArray = tags.split(",");
-        for (i in tagsArray) {
-            //Cogemos el tag. Y comprobamos si ya existe.
-            var tag = tagsArray[i];
-            if (tag == newTag) {
-                return false;
-            }
-        }
-        //Si no hemos vuelto es que no existe. Asi que lo añadimos al hidden.
-        //$("#hdnTags").val(tags + "," + newTag);
-        //Por tanto devolvemos TRUE.
-        return true;
-    }
-    //$(document).ready(function () {
-    //});
-</script>
-@Html.Hidden("hdnTags", "Basic,JavaScript,PHP,Scala")
-*@
+<link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.tagsinput.css")" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tagsinput.js")"></script>
 <div>
     @Html.Label("Ingredientes")
     <input id='tagsIngredientes' type='text' class='tags'>
@@ -84,7 +42,7 @@
     function onRemoveTag(tag) {
         //Quitamos el tag en cuestión.
         var tags = $("#hdnTags").val();
-        tags = tags.replace(tag + ",","");
+        tags = tags.replace(tag + ",", "");
         $("#hdnTags").val(tags);
     }
 
@@ -92,8 +50,13 @@
         width: '350px',
         height: '40px',
         onRemoveTag: onRemoveTag,
-        interactive : false,
-        removeWithBackspace : false,
+        interactive: false,
+        removeWithBackspace: false,
+        onChange: function (elem, elem_tags) {
+            $('.tag', elem_tags).each(function () {
+                $(this).css('background-color', 'yellow');
+            });
+        }
     });
 	
 </script>
