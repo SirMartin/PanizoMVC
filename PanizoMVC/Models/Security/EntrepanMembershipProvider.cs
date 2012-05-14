@@ -215,13 +215,14 @@ namespace PanizoMVC.Models.Security
         /// Logueamos el usuario para Entrepan.
         /// </summary>
         /// <param name="identificadorUnico">El email del usuario, o el ID de facebook o el de Twitter.</param>
-        /// <param name="nombre">El nombre del usuario.</param>
+        /// <param name="id">El ID del usuario en la BBDD.</param>
+        /// <param name="nick">El nombre del usuario.</param>
         /// <param name="isAdmin">Si es administrador o no.</param>
         /// <param name="createPersistentCookie">Si creamos la cookie que permanezca o no.</param>
-        public void LogInUser(String identificadorUnico, String nick, bool isAdmin, bool createPersistentCookie)
+        public void LogInUser(String identificadorUnico, int id, String nick, bool isAdmin, bool createPersistentCookie)
         {
             //Creamos la identidad.
-            String identity = identificadorUnico + Constants.IdentitySeparator + nick + Constants.IdentitySeparator + isAdmin.ToString();
+            String identity = identificadorUnico + Constants.IdentitySeparator + id + Constants.IdentitySeparator + nick + Constants.IdentitySeparator + isAdmin.ToString();
             //Logueamos con la cookie.
             FormsAuthentication.SetAuthCookie(identity, createPersistentCookie);
         }
