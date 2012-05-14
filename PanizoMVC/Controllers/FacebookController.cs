@@ -10,6 +10,7 @@ using Facebook;
 using PanizoMVC.Interfaces;
 using System.Web.Routing;
 using PanizoMVC.Repositorys;
+using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {
@@ -95,6 +96,7 @@ namespace PanizoMVC.Controllers
                         usuario.Nick = (string)me.name;
                         usuario.Email = (string)me.email;
                         usuario.FechaCreacion = DateTime.Now;
+                        usuario.IsAdmin = false;
 
                         //Comprobamos si existe en la BBDD como registrado, si no lo creamos.
                         Usuario userdb = usuarioRepository.GetUsuarioByFacebookUserId(usuario.FacebookId);
@@ -104,9 +106,11 @@ namespace PanizoMVC.Controllers
                             usuarioRepository.AddUsuario(usuario);
                             dbContext.SaveChanges();
                         }
-                    }
 
-                    FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
+                        //Logueamos al usuario.
+                        EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
+                        EntrepanMembership.LogInUser(usuario.FacebookId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
+                    }
 
                     // prevent open redirection attack by checking if the url is local.
                     if (Url.IsLocalUrl(state))

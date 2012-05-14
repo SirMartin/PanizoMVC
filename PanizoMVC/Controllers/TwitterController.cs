@@ -9,6 +9,7 @@ using System.Web.Routing;
 using PanizoMVC.Interfaces;
 using PanizoMVC.Repositorys;
 using System.Web.Security;
+using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {
@@ -77,7 +78,8 @@ namespace PanizoMVC.Controllers
                         TwitterUserId = tokens.UserId.ToString(),
                         TwitterAccessKey = tokens.Token,
                         TwitterAccessSecret = tokens.TokenSecret,
-                        FechaCreacion = DateTime.UtcNow
+                        FechaCreacion = DateTime.UtcNow,
+                        IsAdmin = false
                     };
 
                     usuarioRepository.AddUsuario(usuario);
@@ -85,7 +87,9 @@ namespace PanizoMVC.Controllers
                     dbContext.SaveChanges();
                 }
 
-                FormsAuthentication.SetAuthCookie(usuario.Nick, false);
+                //Logueamos al usuario.
+                EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
+                EntrepanMembership.LogInUser(usuario.TwitterUserId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
             }
 
             if (string.IsNullOrEmpty(ReturnUrl))
