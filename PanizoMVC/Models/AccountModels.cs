@@ -35,7 +35,7 @@ namespace PanizoMVC.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
     }
 

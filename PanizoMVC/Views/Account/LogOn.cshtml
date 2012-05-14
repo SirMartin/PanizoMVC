@@ -19,12 +19,12 @@
             <div style="margin-left: 20px; text-align: left;">
                 <div>
                     @Html.LabelFor(m => m.Email)
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-poshytip", title = "Introduce tu nombre de usuario.", style = "width:200px;", tabindex = 1 })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-poshytip", title = "Introduce tu nombre de usuario.", style = "width:150px;", tabindex = 1 })
                     @Html.ValidationMessageFor(m => m.Email)
                 </div>
                 <div>
                     @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-poshytip", title = "Introduce tu contraseña.", style = "width:200px;", tabindex = 2 })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-poshytip", title = "Introduce tu contraseña.", style = "width:150px;", tabindex = 2 })
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
                 <p>
