@@ -69,31 +69,28 @@ namespace PanizoMVC.Controllers
                     dynamic me = fbClient.Get("me?fields=id,name");
                     long facebookId = Convert.ToInt64(me.id);
 
-                    using (EntrepanDB dbContext = GetNewDBContext())
+                    //Generamos el usuario.
+                    Usuario usuario = new Usuario();
+                    usuario.FacebookId = facebookId.ToString();
+                    usuario.Nick = (string)me.name;
+                    usuario.Email = (string)me.email;
+                    usuario.FechaCreacion = DateTime.Now;
+                    usuario.IsAdmin = false;
+
+                    //Comprobamos si existe en la BBDD como registrado, si no lo creamos.
+                    Usuario userdb = (from u in db.Usuarios
+                                      where u.FacebookId.Equals(usuario.FacebookId)
+                                      select u).FirstOrDefault();
+                    if (userdb == null)
                     {
-                        //Generamos el usuario.
-                        Usuario usuario = new Usuario();
-                        usuario.FacebookId = facebookId.ToString();
-                        usuario.Nick = (string)me.name;
-                        usuario.Email = (string)me.email;
-                        usuario.FechaCreacion = DateTime.Now;
-                        usuario.IsAdmin = false;
-
-                        //Comprobamos si existe en la BBDD como registrado, si no lo creamos.
-                        Usuario userdb = (from u in db.Usuarios
-                                          where u.FacebookId.Equals(usuario.FacebookId)
-                                          select u).FirstOrDefault();
-                        if (userdb == null)
-                        {
-                            //Es un usuario nuevo. Lo guardamos en la BBDD.
-                            db.AddToUsuarios(usuario);
-                            dbContext.SaveChanges();
-                        }
-
-                        //Logueamos al usuario.
-                        EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
-                        EntrepanMembership.LogInUser(usuario.FacebookId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
+                        //Es un usuario nuevo. Lo guardamos en la BBDD.
+                        db.AddToUsuarios(usuario);
+                        db.SaveChanges();
                     }
+
+                    //Logueamos al usuario.
+                    EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
+                    EntrepanMembership.LogInUser(usuario.FacebookId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
 
                     // prevent open redirection attack by checking if the url is local.
                     if (Url.IsLocalUrl(state))

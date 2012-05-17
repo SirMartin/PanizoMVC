@@ -47,34 +47,32 @@ namespace PanizoMVC.Controllers
         oauth_token,
         oauth_verifier);
 
-            using (EntrepanDB dbContext = GetNewDBContext())
+            //Realizamos la busqueda del usuario.
+            Usuario usuario = (from u in db.Usuarios
+                               where u.TwitterUserId.Equals(tokens.UserId.ToString())
+                               select u).FirstOrDefault();
+
+            if (usuario == null)
             {
-                //Realizamos la busqueda del usuario.
-                Usuario usuario = (from u in db.Usuarios
-                                   where u.TwitterUserId.Equals(tokens.UserId.ToString())
-                                   select u).FirstOrDefault();
-
-                if (usuario == null)
+                usuario = new Usuario()
                 {
-                    usuario = new Usuario()
-                    {
-                        Nick = tokens.ScreenName,
-                        TwitterUserId = tokens.UserId.ToString(),
-                        TwitterAccessKey = tokens.Token,
-                        TwitterAccessSecret = tokens.TokenSecret,
-                        FechaCreacion = DateTime.UtcNow,
-                        IsAdmin = false
-                    };
+                    Nick = tokens.ScreenName,
+                    TwitterUserId = tokens.UserId.ToString(),
+                    TwitterAccessKey = tokens.Token,
+                    TwitterAccessSecret = tokens.TokenSecret,
+                    FechaCreacion = DateTime.UtcNow,
+                    IsAdmin = false
+                };
 
-                    db.AddToUsuarios(usuario);
+                db.AddToUsuarios(usuario);
 
-                    dbContext.SaveChanges();
-                }
-
-                //Logueamos al usuario.
-                EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
-                EntrepanMembership.LogInUser(usuario.TwitterUserId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
+                db.SaveChanges();
             }
+
+            //Logueamos al usuario.
+            EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
+            EntrepanMembership.LogInUser(usuario.TwitterUserId, usuario.Id, usuario.Nick, usuario.IsAdmin, false);
+
 
             if (string.IsNullOrEmpty(ReturnUrl))
                 return Redirect("/");

@@ -78,12 +78,7 @@ namespace PanizoMVC.Controllers
 
         #endregion
 
-        protected EntrepanDB GetNewDBContext()
-        {
-            EntrepanDB db = new EntrepanDB();
-            db.ContextOptions.LazyLoadingEnabled = false;
-            return db;
-        }
+        #region Otros Metodos
 
         private static void RaiseErrorSignal(Exception e)
         {
@@ -98,5 +93,6 @@ namespace PanizoMVC.Controllers
             base.OnException(filterContext);
         }
 
+        #endregion
     }
 }
