@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="txtBocadilloAdded" xml:space="preserve">
-    <value>Se ha añadido correctamente el bocadillo {0} a nuestra lista.</value>
+    <value>Añadido el bocadillo {0} de {1} a nuestra lista.</value>
   </data>
   <data name="txtError" xml:space="preserve">
     <value>Ha ocurrido un error.</value>

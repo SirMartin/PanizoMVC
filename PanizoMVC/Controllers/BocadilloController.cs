@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using PanizoMVC;
 using PanizoMVC.Utilities;
 using PanizoMVC.Models.Security;
+using PanizoMVC.Models;
 
 namespace PanizoMVC.Controllers
 {
@@ -90,6 +91,15 @@ namespace PanizoMVC.Controllers
                     bocadillo.BocadilloIngrediente.Add(item);
                 }
                 db.SaveChanges();
+
+                //Añadimos el mensaje informando.
+                Message msg = new Message()
+                {
+                    type = TypeMessage.Create,
+                    text = String.Format(Resources.Mensajes.txtRestaurantAdded, bocadillo.Nombre, bocadillo.Restaurante.Nombre)
+                };
+                ViewBag.Message = msg;
+
 
                 return RedirectToAction("Carta", new { idRestaurante = bocadillo.IdRestaurante });
             }

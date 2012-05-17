@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Se ha añadido correctamente el bocadillo {0} a nuestra lista..
+        ///   Looks up a localized string similar to Añadido el bocadillo {0} de {1} a nuestra lista..
         /// </summary>
         internal static string txtBocadilloAdded {
             get {
