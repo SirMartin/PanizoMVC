@@ -16,7 +16,7 @@ namespace PanizoMVC.Controllers
         private EntrepanDB db = new EntrepanDB();
         EntrepanMembershipProvider EntrepanMembership = new EntrepanMembershipProvider();
 
-        #region Logon
+        #region LogOn
 
         public ActionResult Logon()
         {

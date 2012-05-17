@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using PanizoMVC;
 using PanizoMVC.Utilities;
-using PanizoMVC.Models.Security
+using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {

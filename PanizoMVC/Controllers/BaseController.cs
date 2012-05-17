@@ -8,6 +8,8 @@ namespace PanizoMVC.Controllers
 {
     public class BaseController : Controller
     {
+        private EntrepanDB db = new EntrepanDB();
+
         #region Propiedades Globales
 
         /// <summary>
@@ -19,6 +21,59 @@ namespace PanizoMVC.Controllers
             {
                 return Boolean.Parse(System.Configuration.ConfigurationManager.AppSettings.Get("IsDebug"));
             }
+        }
+
+        #endregion
+
+        #region Para controlar si cumple los permisos.
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            // Check if this action has Authorization attribute
+            object[] attributes = filterContext.ActionDescriptor.GetCustomAttributes(true);
+            bool permisosOk = true;
+            int id = 0;
+
+            //Recogemos al usuario logueado.
+            if (!HttpContext.User.Identity.Name.Equals(String.Empty))
+            {
+                String[] arrayIdentity = HttpContext.User.Identity.Name.Split(PanizoMVC.Utilities.Constants.IdentitySeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                id = Convert.ToInt32(arrayIdentity[1]);
+            }
+            Usuario usuario = db.Usuarios.Where(g => g.Id == id).FirstOrDefault();
+
+            //importante, hay que ir comparando entrando primero en los roles más poderosos            
+            if (attributes.Any(a => a is PanizoMVC.Models.Security.AuthorizationAttributes.UserAuthorize))
+            {
+                if (usuario == null)
+                {
+                    permisosOk = false;
+                }
+            }
+            else if (attributes.Any(a => a is PanizoMVC.Models.Security.AuthorizationAttributes.AdminAuthorize))
+            {
+
+                if (usuario == null)
+                {
+                    permisosOk = false;
+                }
+                else
+                {
+                    permisosOk = usuario.IsAdmin;
+                }
+            }
+
+            if (permisosOk)
+            {
+                return;
+            }
+            else
+            {
+                filterContext.Result = new HttpUnauthorizedResult("No tienes permiso");
+            }
+
+
+            base.OnActionExecuting(filterContext);
         }
 
         #endregion

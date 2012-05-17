@@ -10,7 +10,7 @@ using PanizoMVC.Models;
 
 namespace PanizoMVC.Controllers
 {
-    public class IngredientesController : Controller
+    public class IngredientesController : BaseController
     {
         private EntrepanDB db = new EntrepanDB();
 
