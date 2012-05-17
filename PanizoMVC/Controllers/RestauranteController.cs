@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using PanizoMVC;
 using PanizoMVC.Models;
+using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {
@@ -122,6 +123,7 @@ namespace PanizoMVC.Controllers
 
         #region Create
 
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Create()
         {
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre");
@@ -132,6 +134,7 @@ namespace PanizoMVC.Controllers
         // POST: /Restaurante/Create
 
         [HttpPost]
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Create(Restaurante restaurante)
         {
             //Añadimos la ciudad y la fecha de creación.
@@ -151,7 +154,8 @@ namespace PanizoMVC.Controllers
         #endregion
 
         #region Edit
-
+        
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Edit(int id)
         {
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
@@ -163,6 +167,7 @@ namespace PanizoMVC.Controllers
         // POST: /Restaurante/Edit/5
 
         [HttpPost]
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Edit(Restaurante restaurante)
         {
             if (ModelState.IsValid)
@@ -182,7 +187,8 @@ namespace PanizoMVC.Controllers
 
         //
         // GET: /Restaurante/Delete/5
- 
+
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult Delete(int id)
         {
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
@@ -193,6 +199,7 @@ namespace PanizoMVC.Controllers
         // POST: /Restaurante/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {            
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using PanizoMVC;
 using PanizoMVC.Utilities;
+using PanizoMVC.Models.Security
 
 namespace PanizoMVC.Controllers
 {
@@ -52,6 +53,7 @@ namespace PanizoMVC.Controllers
 
         #region Create
 
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Create(int idRestaurante)
         {
             ViewData["IdRestaurante"] = idRestaurante;
@@ -59,6 +61,7 @@ namespace PanizoMVC.Controllers
         }
 
         [HttpPost]
+        [AuthorizationAttributes.UserAuthorize]
         public ActionResult Create(Bocadillo bocadillo, FormCollection collection)
         {
             //Rellenamos el idRestaurante.
@@ -100,6 +103,7 @@ namespace PanizoMVC.Controllers
 
         #region Edit
 
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult Edit(int id)
         {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
@@ -111,6 +115,7 @@ namespace PanizoMVC.Controllers
         // POST: /Bocadillo/Edit/5
 
         [HttpPost]
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult Edit(Bocadillo bocadillo)
         {
             if (ModelState.IsValid)
@@ -128,6 +133,7 @@ namespace PanizoMVC.Controllers
 
         #region Delete
 
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult Delete(int id)
         {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
@@ -138,6 +144,7 @@ namespace PanizoMVC.Controllers
         // POST: /Bocadillo/Delete/5
 
         [HttpPost, ActionName("Delete")]
+        [AuthorizationAttributes.AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Bocadillo bocadillo = db.Bocadillos.Single(b => b.Id == id);
