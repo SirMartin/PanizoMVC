@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using PanizoMVC.Utilities;
 using System.Configuration;
 using System.Web.Routing;
-using PanizoMVC.Interfaces;
-using PanizoMVC.Repositorys;
 using System.Web.Security;
 using PanizoMVC.Models.Security;
 
@@ -15,21 +13,7 @@ namespace PanizoMVC.Controllers
 {
     public class TwitterController : BaseController
     {
-        #region Repositorios
-
-        public IUsuarioRep usuarioRepository { get; set; }
-
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (usuarioRepository == null)
-            {
-                usuarioRepository = new UsuarioRepository();
-            }
-
-            base.Initialize(requestContext);
-        }
-
-        #endregion
+        private EntrepanDB db = new EntrepanDB();
 
         public ActionResult Index()
         {
@@ -65,11 +49,11 @@ namespace PanizoMVC.Controllers
 
             using (EntrepanDB dbContext = GetNewDBContext())
             {
-                //Asignamos el context.
-                usuarioRepository.DBContext = dbContext;
-
                 //Realizamos la busqueda del usuario.
-                Usuario usuario = usuarioRepository.GetUsuarioByTwitterUserId(tokens.UserId.ToString());
+                Usuario usuario = (from u in db.Usuarios
+                                   where u.TwitterUserId.Equals(tokens.UserId.ToString())
+                                   select u).FirstOrDefault();
+
                 if (usuario == null)
                 {
                     usuario = new Usuario()
@@ -82,7 +66,7 @@ namespace PanizoMVC.Controllers
                         IsAdmin = false
                     };
 
-                    usuarioRepository.AddUsuario(usuario);
+                    db.AddToUsuarios(usuario);
 
                     dbContext.SaveChanges();
                 }

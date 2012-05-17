@@ -7,30 +7,14 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Web.Security;
 using Facebook;
-using PanizoMVC.Interfaces;
 using System.Web.Routing;
-using PanizoMVC.Repositorys;
 using PanizoMVC.Models.Security;
 
 namespace PanizoMVC.Controllers
 {
     public class FacebookController : BaseController
     {
-        #region Repositorios
-
-        public IUsuarioRep usuarioRepository { get; set; }
-
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (usuarioRepository == null)
-            {
-                usuarioRepository = new UsuarioRepository();
-            }
-
-            base.Initialize(requestContext);
-        }
-
-        #endregion
+        private EntrepanDB db = new EntrepanDB();
 
         private const string logoffUrlDebug = "http://localhost:50649/";
         private const string redirectUrlDebug = "http://localhost:50649/Facebook/OAuth";
@@ -87,9 +71,6 @@ namespace PanizoMVC.Controllers
 
                     using (EntrepanDB dbContext = GetNewDBContext())
                     {
-                        //Asignamos el context.
-                        usuarioRepository.DBContext = dbContext;
-
                         //Generamos el usuario.
                         Usuario usuario = new Usuario();
                         usuario.FacebookId = facebookId.ToString();
@@ -99,11 +80,13 @@ namespace PanizoMVC.Controllers
                         usuario.IsAdmin = false;
 
                         //Comprobamos si existe en la BBDD como registrado, si no lo creamos.
-                        Usuario userdb = usuarioRepository.GetUsuarioByFacebookUserId(usuario.FacebookId);
+                        Usuario userdb = (from u in db.Usuarios
+                                          where u.FacebookId.Equals(usuario.FacebookId)
+                                          select u).FirstOrDefault();
                         if (userdb == null)
                         {
                             //Es un usuario nuevo. Lo guardamos en la BBDD.
-                            usuarioRepository.AddUsuario(usuario);
+                            db.AddToUsuarios(usuario);
                             dbContext.SaveChanges();
                         }
 
