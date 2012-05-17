@@ -8,7 +8,8 @@
         });
     });
 </script>
-@if (Model != null)
+@{
+    if (Model != null)
 {
     if (Model.type == PanizoMVC.Models.TypeMessage.Create)
     {
@@ -65,4 +66,5 @@
         </div>
     </div>
     }
+}
 }
