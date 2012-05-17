@@ -167,6 +167,7 @@
         <div id="main">
             <!-- content -->
             <div id="content">
+                @Html.Partial("PartialMessages", ViewData["Message"])
                 @RenderBody()
             </div>
             <!-- ENDS content -->

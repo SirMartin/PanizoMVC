@@ -1,0 +1,68 @@
+﻿@model PanizoMVC.Models.Message
+<script type="text/javascript">
+    $(function () {
+        $("#message").fadeIn(2000);
+
+        $("#closeMessage").click(function () {
+            $("#message").fadeOut();
+        });
+    });
+</script>
+@if (Model != null)
+{
+    if (Model.type == PanizoMVC.Models.TypeMessage.Create)
+    {
+    <div id="message" class="info-add" style="display: none;">
+        <div style="width: 90%; float: left;">
+            @Model.text
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+            <a id="closeMessage" href="#">X</a>
+        </div>
+    </div>
+    }
+    else if (Model.type == PanizoMVC.Models.TypeMessage.Error)
+    {
+    <div id="message" class="error-box" style="display: none;">
+        <div style="width: 90%; float: left;">
+            @Model.text
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+            <a id="closeMessage" href="#">X</a>
+        </div>
+    </div>
+    }
+    else if (Model.type == PanizoMVC.Models.TypeMessage.Information)
+    {
+    <div id="message" class="information-box" style="display: none;">
+        <div style="width: 90%; float: left;">
+            @Model.text
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+            <a id="closeMessage" href="#">X</a>
+        </div>
+    </div>
+    }
+    else if (Model.type == PanizoMVC.Models.TypeMessage.Vote)
+    {
+    <div id="message" class="favorite-box" style="display: none;">
+        <div style="width: 90%; float: left;">
+            @Model.text
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+            <a id="closeMessage" href="#">X</a>
+        </div>
+    </div>
+    }
+    else if (Model.type == PanizoMVC.Models.TypeMessage.Warning)
+    {
+    <div id="message" class="warning-box" style="display: none;">
+        <div style="width: 90%; float: left;">
+            @Model.text
+        </div>
+        <div style="width: 10%; float: left; text-align: right;">
+            <a id="closeMessage" href="#">X</a>
+        </div>
+    </div>
+    }
+}
