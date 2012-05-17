@@ -100,8 +100,8 @@
           <Property Name="IdCiudad" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="Direccion" Type="nvarchar" Nullable="false" MaxLength="500" />
-          <Property Name="CP" Type="nvarchar" Nullable="false" MaxLength="5" />
-          <Property Name="Telefono" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CP" Type="nvarchar" MaxLength="5" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
           <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="Web" Type="nvarchar" MaxLength="150" />
@@ -372,8 +372,8 @@
           <Property Name="IdCiudad" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="CP" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
-          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CP" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_Bocadillo_Restaurante" FromRole="Restaurante" ToRole="Bocadillo" />

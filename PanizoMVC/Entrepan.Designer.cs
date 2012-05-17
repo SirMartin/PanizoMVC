@@ -1147,19 +1147,15 @@ namespace PanizoMVC
         /// <param name="idCiudad">Initial value of the IdCiudad property.</param>
         /// <param name="nombre">Initial value of the Nombre property.</param>
         /// <param name="direccion">Initial value of the Direccion property.</param>
-        /// <param name="cP">Initial value of the CP property.</param>
-        /// <param name="telefono">Initial value of the Telefono property.</param>
         /// <param name="descripcion">Initial value of the Descripcion property.</param>
         /// <param name="fechaCreacion">Initial value of the FechaCreacion property.</param>
-        public static Restaurante CreateRestaurante(global::System.Int32 id, global::System.Int32 idCiudad, global::System.String nombre, global::System.String direccion, global::System.String cP, global::System.String telefono, global::System.String descripcion, global::System.DateTime fechaCreacion)
+        public static Restaurante CreateRestaurante(global::System.Int32 id, global::System.Int32 idCiudad, global::System.String nombre, global::System.String direccion, global::System.String descripcion, global::System.DateTime fechaCreacion)
         {
             Restaurante restaurante = new Restaurante();
             restaurante.Id = id;
             restaurante.IdCiudad = idCiudad;
             restaurante.Nombre = nombre;
             restaurante.Direccion = direccion;
-            restaurante.CP = cP;
-            restaurante.Telefono = telefono;
             restaurante.Descripcion = descripcion;
             restaurante.FechaCreacion = fechaCreacion;
             return restaurante;
@@ -1270,7 +1266,7 @@ namespace PanizoMVC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String CP
         {
@@ -1282,7 +1278,7 @@ namespace PanizoMVC
             {
                 OnCPChanging(value);
                 ReportPropertyChanging("CP");
-                _CP = StructuralObject.SetValidValue(value, false);
+                _CP = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("CP");
                 OnCPChanged();
             }
@@ -1294,7 +1290,7 @@ namespace PanizoMVC
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Telefono
         {
@@ -1306,7 +1302,7 @@ namespace PanizoMVC
             {
                 OnTelefonoChanging(value);
                 ReportPropertyChanging("Telefono");
-                _Telefono = StructuralObject.SetValidValue(value, false);
+                _Telefono = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Telefono");
                 OnTelefonoChanged();
             }
