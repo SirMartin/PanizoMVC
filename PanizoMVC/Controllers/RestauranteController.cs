@@ -19,50 +19,16 @@ namespace PanizoMVC.Controllers
 
         public ViewResult Index()
         {
-            //Creamos un modelo de columna.
-            ColumnModel col1 = new ColumnModel()
-            {
-                UrlImage = "http://lorempixel.com/282/150/food/1",
-                Titulo = "Añade tu restaurante",
-                Texto = "Has descubierto un nuevo restaurante que quieres compartir con todos nosotros, hazlo desde aquí.",
-                TextoAbajo = "Añadir Restaurante",
-                Action = "Create",
-                Controller = "Restaurante"
-            };
+            #region Añadimos las columnas.
 
-            ViewBag.Column1 = col1;
+            ColumnModel[] columns = GetColumnsForRestaurant();
+            ViewBag.Column1 = columns[0];
+            ViewBag.Column2 = columns[1];
+            ViewBag.Column3 = columns[2];
 
-            //Creamos un modelo de columna.
-            ColumnModel col2 = new ColumnModel()
-            {
-                UrlImage = "http://lorempixel.com/282/150/food/3",
-                Titulo = "Los + Valorados",
-                Texto = "Aquí encontraras el top de restaurantes según vuestros propios votos. No olvides votar a tus favoritos.",
-                TextoAbajo = "Ver los mas valorados",
-                //Action = "Valorados",
-                //Controller = "Restaurante"
-                Action = "Index",
-                Controller = "AdminRestaurante"
-            };
-
-            ViewBag.Column2 = col2;
-
-            //Creamos un modelo de columna.
-            ColumnModel col3 = new ColumnModel()
-            {
-                UrlImage = "http://lorempixel.com/282/150/food/7",
-                Titulo = "Los últimos en llegar",
-                Texto = "Quieres ver los últimos restaurante que la gente ha descubierto. Aquí puedes ver las últimas novedades en entrepan.",
-                TextoAbajo = "Nuevos Restaurantes",
-                Action = "Ultimos",
-                Controller = "Restaurante"
-            };
-
-            ViewBag.Column3 = col3;
+            #endregion
 
             var restaurantes = db.Restaurantes.Include("Ciudad");
-
-            ViewData["Messages"] = null;
 
             return View(restaurantes.ToList());
         }
@@ -130,12 +96,8 @@ namespace PanizoMVC.Controllers
         public ActionResult Create()
         {
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre");
-            ViewData["Messages"] = null;
             return View();
-        } 
-
-        //
-        // POST: /Restaurante/Create
+        }
 
         [HttpPost]
         [AuthorizationAttributes.UserAuthorize]
@@ -148,16 +110,25 @@ namespace PanizoMVC.Controllers
             {
                 db.Restaurantes.AddObject(restaurante);
                 db.SaveChanges();
-                
+
                 //Añadimos el mensaje informando.
                 Message msg = new Message()
                 {
                     type = TypeMessage.Create,
-                    text = Resources.Mensajes.txtRestaurantAdded
+                    text = String.Format(Resources.Mensajes.txtRestaurantAdded, restaurante.Nombre)
                 };
-                ViewData["Messages"] = msg;
+                ViewBag.Message = msg;
 
-                return RedirectToAction("Index");
+                #region Añadimos las columnas.
+
+                ColumnModel[] columns = GetColumnsForRestaurant();
+                ViewBag.Column1 = columns[0];
+                ViewBag.Column2 = columns[1];
+                ViewBag.Column3 = columns[2];
+
+                #endregion
+
+                return View("Index");
             }
 
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre", restaurante.IdCiudad);
@@ -167,7 +138,7 @@ namespace PanizoMVC.Controllers
         #endregion
 
         #region Edit
-        
+
         [AuthorizationAttributes.UserAuthorize]
         public ActionResult Edit(int id)
         {
@@ -214,7 +185,7 @@ namespace PanizoMVC.Controllers
         [HttpPost, ActionName("Delete")]
         [AuthorizationAttributes.AdminAuthorize]
         public ActionResult DeleteConfirmed(int id)
-        {            
+        {
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
             db.Restaurantes.DeleteObject(restaurante);
             db.SaveChanges();
@@ -257,6 +228,58 @@ namespace PanizoMVC.Controllers
 
             //Pasamos a la vista.
             return View();
+        }
+
+        #endregion
+
+        #region Columnas Restaurante.
+
+        private ColumnModel[] GetColumnsForRestaurant()
+        {
+            List<ColumnModel> columns = new List<ColumnModel>();
+
+            //Creamos un modelo de columna.
+            ColumnModel col1 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/1",
+                Titulo = "Añade tu restaurante",
+                Texto = "Has descubierto un nuevo restaurante que quieres compartir con todos nosotros, hazlo desde aquí.",
+                TextoAbajo = "Añadir Restaurante",
+                Action = "Create",
+                Controller = "Restaurante"
+            };
+
+            columns.Add(col1);
+
+            //Creamos un modelo de columna.
+            ColumnModel col2 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/3",
+                Titulo = "Los + Valorados",
+                Texto = "Aquí encontraras el top de restaurantes según vuestros propios votos. No olvides votar a tus favoritos.",
+                TextoAbajo = "Ver los mas valorados",
+                //Action = "Valorados",
+                //Controller = "Restaurante"
+                Action = "Index",
+                Controller = "AdminRestaurante"
+            };
+
+            columns.Add(col2);
+
+            //Creamos un modelo de columna.
+            ColumnModel col3 = new ColumnModel()
+            {
+                UrlImage = "http://lorempixel.com/282/150/food/7",
+                Titulo = "Los últimos en llegar",
+                Texto = "Quieres ver los últimos restaurante que la gente ha descubierto. Aquí puedes ver las últimas novedades en entrepan.",
+                TextoAbajo = "Nuevos Restaurantes",
+                Action = "Ultimos",
+                Controller = "Restaurante"
+            };
+
+            columns.Add(col3);
+
+            return columns.ToArray();
         }
 
         #endregion

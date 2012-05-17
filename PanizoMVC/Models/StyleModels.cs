@@ -55,7 +55,8 @@ namespace PanizoMVC.Models
         Warning,
         Error,
         Vote,
-        Information
+        Information,
+        NoMessage
     };
 
     #endregion
