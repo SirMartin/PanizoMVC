@@ -61,6 +61,9 @@ namespace PanizoMVC.Controllers
             ViewBag.Column3 = col3;
 
             var restaurantes = db.Restaurantes.Include("Ciudad");
+
+            ViewData["Messages"] = null;
+
             return View(restaurantes.ToList());
         }
 
@@ -127,6 +130,7 @@ namespace PanizoMVC.Controllers
         public ActionResult Create()
         {
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre");
+            ViewData["Messages"] = null;
             return View();
         } 
 
@@ -144,7 +148,16 @@ namespace PanizoMVC.Controllers
             {
                 db.Restaurantes.AddObject(restaurante);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                
+                //Añadimos el mensaje informando.
+                Message msg = new Message()
+                {
+                    type = TypeMessage.Create,
+                    text = Resources.Mensajes.txtRestaurantAdded
+                };
+                ViewData["Messages"] = msg;
+
+                return RedirectToAction("Index");
             }
 
             ViewBag.IdCiudad = new SelectList(db.Ciudades, "Id", "Nombre", restaurante.IdCiudad);
