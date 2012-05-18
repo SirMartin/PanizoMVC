@@ -42,6 +42,14 @@ namespace PanizoMVC.Controllers
             //Cogemos la información del restaurante.
             Restaurante restaurante = db.Restaurantes.Single(r => r.Id == id);
 
+            //Cogemos los votos del restaurante.
+            List<VotosRestaurante> votos = db.VotosRestaurantes.Where(g => g.IdRestaurante == id).ToList();
+            int sumaVotos = 0;
+            votos.ForEach(g => sumaVotos += g.Voto);
+            //Pasamos los datos de los votos en el viewbag.
+            ViewBag.TotalVotosRestaurante = votos.Count;
+            ViewBag.VotosRestaurante = sumaVotos;
+
             //Creamos un modelo de columna.
             ColumnModel col1 = new ColumnModel()
             {
@@ -232,7 +240,7 @@ namespace PanizoMVC.Controllers
 
         #endregion
 
-        #region Columnas Restaurante.
+        #region Columnas Restaurante
 
         private ColumnModel[] GetColumnsForRestaurant()
         {

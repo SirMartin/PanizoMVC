@@ -34,8 +34,15 @@
                     @Html.Partial("PartialVotes")
                 </div>
                 <div style="float: left; width: 50%">
-                    Nota Media:<br />
-                    <span style="font-size: 20pt; font-weight: bold;">7.58</span>
+                    Nota Media (0 - 5):<br />
+                    <span style="font-size: 20pt; font-weight: bold;">
+                        @if (ViewBag.TotalVotosRestaurante == 0)
+                        {
+                            @: -
+                        }else{
+                            @:ViewBag.VotosRestaurante
+                        }
+                    </span>(@ViewBag.TotalVotosRestaurante votos)
                 </div>
             </div>
         </fieldset>
