@@ -28,9 +28,15 @@
                         @Model.CP @Model.Ciudad.Nombre</h6>
             </div>
             <div>
-                Valora el restaurante:
-                <br />
-                @Html.Partial("PartialVotes")
+                <div style="float: left; width: 50%">
+                    Valora el restaurante:
+                    <br />
+                    @Html.Partial("PartialVotes")
+                </div>
+                <div style="float: left; width: 50%">
+                    Nota Media:<br />
+                    <span style="font-size: 20pt; font-weight: bold;">7.58</span>
+                </div>
             </div>
         </fieldset>
     </div>
