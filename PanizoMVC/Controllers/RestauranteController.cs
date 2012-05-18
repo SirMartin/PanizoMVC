@@ -50,6 +50,21 @@ namespace PanizoMVC.Controllers
             ViewBag.TotalVotosRestaurante = votos.Count;
             ViewBag.VotosRestaurante = sumaVotos;
 
+            //Cogemos el usuario logueado.
+            String[] arrayIdentity = User.Identity.Name.Split(PanizoMVC.Utilities.Constants.IdentitySeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            int idUsuario = int.Parse(arrayIdentity[1]);
+
+            //Recogemos si el usuario actual tiene voto o no.
+            VotosRestaurante voto = votos.Where(g => g.IdUsuario == idUsuario).FirstOrDefault();
+            if (voto != null)
+            {
+                ViewData["VotoActual"] = voto.Voto;
+            }
+            else
+            {
+                ViewData["VotoActual"] = 0;
+            }
+
             //Creamos un modelo de columna.
             ColumnModel col1 = new ColumnModel()
             {
