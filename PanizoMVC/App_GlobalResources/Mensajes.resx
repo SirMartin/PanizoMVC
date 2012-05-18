@@ -126,4 +126,7 @@
   <data name="txtRestaurantAdded" xml:space="preserve">
     <value>Se ha añadido correctamente el restaurante {0} a nuestra lista.</value>
   </data>
+  <data name="txtVoto" xml:space="preserve">
+    <value>Su voto ha sido registrado.</value>
+  </data>
 </root>

@@ -86,5 +86,14 @@ namespace Resources {
                 return ResourceManager.GetString("txtRestaurantAdded", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Su voto ha sido registrado..
+        /// </summary>
+        internal static string txtVoto {
+            get {
+                return ResourceManager.GetString("txtVoto", resourceCulture);
+            }
+        }
     }
 }
