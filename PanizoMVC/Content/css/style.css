@@ -725,3 +725,10 @@ h6
     color: #CCC;
     text-decoration: none;
 }
+
+/* Para que se muestre el ratón con la mano */
+.link
+{
+    cursor: pointer;
+    cursor: hand;
+}

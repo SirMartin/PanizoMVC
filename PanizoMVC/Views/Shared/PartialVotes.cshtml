@@ -1,0 +1,167 @@
+<script type="text/javascript">
+
+    $(function () {
+        $("#imgVote1").hover(
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 1) {
+                    VoteHover(1);
+                }
+            },
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 1) {
+                    VoteHover(1);
+                }
+            }
+        );
+        $("#imgVote2").hover(
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 2) {
+                    VoteHover(1);
+                    VoteHover(2);
+                }
+            },
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 2) {
+                    VoteHover(1);
+                    VoteHover(2);
+                }
+            }
+        );
+        $("#imgVote3").hover(
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 3) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                }
+            },
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 3) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                }
+            }
+        );
+        $("#imgVote4").hover(
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 4) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                    VoteHover(4);
+                }
+            },
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 4) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                    VoteHover(4);
+                }
+            }
+        );
+        $("#imgVote5").hover(
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 5) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                    VoteHover(4);
+                    VoteHover(5);
+                }
+            },
+            function () {
+                if (parseFloat($("#hdnVote").val()) < 5) {
+                    VoteHover(1);
+                    VoteHover(2);
+                    VoteHover(3);
+                    VoteHover(4);
+                    VoteHover(5);
+                }
+            }
+        );
+
+        $("#imgVote1").click(function () {
+            //Votamos
+            $("#hdnVote").val(1);
+            //Cambiamos las imagenes.
+            ChangeImage(1, true);
+            ChangeImage(2, false);
+            ChangeImage(3, false);
+            ChangeImage(4, false);
+            ChangeImage(5, false);
+        });
+        $("#imgVote2").click(function () {
+            //Votamos
+            $("#hdnVote").val(2);
+            //Cambiamos las imagenes.
+            ChangeImage(1, true);
+            ChangeImage(2, true);
+            ChangeImage(3, false);
+            ChangeImage(4, false);
+            ChangeImage(5, false);
+        });
+        $("#imgVote3").click(function () {
+            //Votamos
+            $("#hdnVote").val(3);
+            //Cambiamos las imagenes.
+            ChangeImage(1, true);
+            ChangeImage(2, true);
+            ChangeImage(3, true);
+            ChangeImage(4, false);
+            ChangeImage(5, false);
+        });
+        $("#imgVote4").click(function () {
+            //Votamos
+            $("#hdnVote").val(4);
+            //Cambiamos las imagenes.
+            ChangeImage(1, true);
+            ChangeImage(2, true);
+            ChangeImage(3, true);
+            ChangeImage(4, true);
+            ChangeImage(5, false);
+        });
+        $("#imgVote5").click(function () {
+            //Votamos
+            $("#hdnVote").val(5);
+            //Cambiamos las imagenes.
+            ChangeImage(1, true);
+            ChangeImage(2, true);
+            ChangeImage(3, true);
+            ChangeImage(4, true);
+            ChangeImage(5, true);
+        });
+
+        function ChangeImage(idImg, turnOn) {
+            if (turnOn == true) {
+                //Lo encendemos.
+                var str = $("#imgVote" + idImg).attr("src");
+                str = str.replace("Off", "On");
+                $("#imgVote" + idImg).attr("src", str);
+            } else {
+                //Lo apagamos.
+                var str = $("#imgVote" + idImg).attr("src");
+                str = str.replace("On", "Off");
+                $("#imgVote" + idImg).attr("src", str);
+            }
+        }
+
+        function VoteHover(idImg) {
+            var str = $("#imgVote" + idImg).attr("src");
+            if ($("#imgVote" + idImg).attr("src").indexOf("voteOn") == -1) {
+                str = str.replace("Off", "On");
+            } else {
+                str = str.replace("On", "Off");
+            }
+            $("#imgVote" + idImg).attr("src", str);
+        }
+    });
+
+</script>
+<img id="imgVote1" class="link" src="@Url.Content("/Content/images/votes/voteOff_01.png")" width="20" height="31" alt="">
+<img id="imgVote2" class="link" style="position:relative; left: -4px;" src="@Url.Content("/Content/images/votes/voteOff_02.png")" width="20" height="31" alt="">
+<img id="imgVote3" class="link" style="position:relative; left: -8px;" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="">
+<img id="imgVote4" class="link" style="position:relative; left: -12px;" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="">
+<img id="imgVote5" class="link" style="position:relative; left: -16px;" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="">
+@Html.Hidden("hdnVote", 0)

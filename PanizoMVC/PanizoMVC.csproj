@@ -146,6 +146,16 @@
     <Content Include="Content\images\sdd.jpg" />
     <Content Include="Content\images\sdd_.jpg" />
     <Content Include="Content\images\twitter_connect.png" />
+    <Content Include="Content\images\votes\voteOff_01.png" />
+    <Content Include="Content\images\votes\voteOff_02.png" />
+    <Content Include="Content\images\votes\voteOff_03.png" />
+    <Content Include="Content\images\votes\voteOff_04.png" />
+    <Content Include="Content\images\votes\voteOff_05.png" />
+    <Content Include="Content\images\votes\voteOn_01.png" />
+    <Content Include="Content\images\votes\voteOn_02.png" />
+    <Content Include="Content\images\votes\voteOn_03.png" />
+    <Content Include="Content\images\votes\voteOn_04.png" />
+    <Content Include="Content\images\votes\voteOn_05.png" />
     <Content Include="Content\js\custom.js" />
     <Content Include="Content\js\DD_belatedPNG.js" />
     <Content Include="Content\js\easing.js" />
@@ -924,6 +934,7 @@
     <Content Include="Views\Bocadillo\Carta.cshtml" />
     <Content Include="Views\Shared\PartialIngredientes.cshtml" />
     <Content Include="Views\Shared\PartialMessages.cshtml" />
+    <Content Include="Views\Shared\PartialVotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Mensajes.resx">
