@@ -93,6 +93,8 @@ body
     text-decoration: none;
     font-family: 'Ceviche One' , cursive;
     font-size: 15pt;
+    width: 150pt;
+    text-align: center;
 }
 
 /*#content a
