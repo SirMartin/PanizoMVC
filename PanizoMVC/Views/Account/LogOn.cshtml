@@ -35,7 +35,7 @@
         <div style="width: 65%; height: 120px; float: left;" align="center">
             <div class="FacebookLogInBtn">
                 <p>
-                    @Html.ActionLink("Accede con Facebook", "LogOn", "Facebook", new { returnurl = "/" }, null)
+                    @Html.ActionLink("Accede con Facebook", "LogOn", "Facebook", new { returnurl = Url.Action("Index", "Home") }, null)
                 </p>
             </div>
         </div>
