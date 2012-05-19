@@ -44,11 +44,19 @@ namespace PanizoMVC.Controllers
 
             //Cogemos los votos del restaurante.
             List<VotosRestaurante> votos = db.VotosRestaurantes.Where(g => g.IdRestaurante == id).ToList();
-            int sumaVotos = 0;
-            votos.ForEach(g => sumaVotos += g.Voto);
-            //Pasamos los datos de los votos en el viewbag.
-            ViewBag.TotalVotosRestaurante = votos.Count;
-            ViewBag.VotosRestaurante = sumaVotos;
+            if (votos.Count > 0)
+            {
+                decimal sumaVotos = 0;
+                votos.ForEach(g => sumaVotos += g.Voto);
+                //Pasamos los datos de los votos en el viewbag.
+                ViewBag.TotalVotosRestaurante = votos.Count;
+                ViewBag.VotosRestaurante = Math.Round((sumaVotos / votos.Count), 2);
+            }
+            else
+            {
+                ViewBag.TotalVotosRestaurante = 0;
+                ViewBag.VotosRestaurante = 0;
+            }
 
             //Cogemos el usuario logueado.
             String[] arrayIdentity = User.Identity.Name.Split(PanizoMVC.Utilities.Constants.IdentitySeparator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
