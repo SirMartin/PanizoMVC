@@ -109,6 +109,7 @@
     <Compile Include="Controllers\RestauranteController.cs" />
     <Compile Include="Controllers\TwitterController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Entrepan.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

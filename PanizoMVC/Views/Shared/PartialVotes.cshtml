@@ -1,6 +1,52 @@
 <script type="text/javascript">
-
     $(function () {
+        //Nada mas cargar hacemos esto.
+        //Vemos si hay voto o no.
+        var votoActual = parseFloat($("#hdnVote").val());
+        switch (votoActual) {
+            case 1:
+                ChangeImage(1, true);
+                ChangeImage(2, false);
+                ChangeImage(3, false);
+                ChangeImage(4, false);
+                ChangeImage(5, false);
+                break;
+            case 2:
+                ChangeImage(1, true);
+                ChangeImage(2, true);
+                ChangeImage(3, false);
+                ChangeImage(4, false);
+                ChangeImage(5, false);
+                break;
+            case 3:
+                ChangeImage(1, true);
+                ChangeImage(2, true);
+                ChangeImage(3, true);
+                ChangeImage(4, false);
+                ChangeImage(5, false);
+                break;
+            case 4:
+                ChangeImage(1, true);
+                ChangeImage(2, true);
+                ChangeImage(3, true);
+                ChangeImage(4, true);
+                ChangeImage(5, false);
+                break;
+            case 5:
+                ChangeImage(1, true);
+                ChangeImage(2, true);
+                ChangeImage(3, true);
+                ChangeImage(4, true);
+                ChangeImage(5, true);
+                break;
+            default:
+                ChangeImage(1, false);
+                ChangeImage(2, false);
+                ChangeImage(3, false);
+                ChangeImage(4, false);
+                ChangeImage(5, false);
+        }
+
         $("#imgVote1").hover(
             function () {
                 if (parseFloat($("#hdnVote").val()) < 1) {
@@ -91,6 +137,8 @@
             ChangeImage(3, false);
             ChangeImage(4, false);
             ChangeImage(5, false);
+            //Enviamos el voto.
+            SendVoto();
         });
         $("#imgVote2").click(function () {
             //Votamos
@@ -101,6 +149,8 @@
             ChangeImage(3, false);
             ChangeImage(4, false);
             ChangeImage(5, false);
+            //Enviamos el voto.
+            SendVoto();
         });
         $("#imgVote3").click(function () {
             //Votamos
@@ -111,6 +161,8 @@
             ChangeImage(3, true);
             ChangeImage(4, false);
             ChangeImage(5, false);
+            //Enviamos el voto.
+            SendVoto();
         });
         $("#imgVote4").click(function () {
             //Votamos
@@ -121,6 +173,8 @@
             ChangeImage(3, true);
             ChangeImage(4, true);
             ChangeImage(5, false);
+            //Enviamos el voto.
+            SendVoto();
         });
         $("#imgVote5").click(function () {
             //Votamos
@@ -131,6 +185,8 @@
             ChangeImage(3, true);
             ChangeImage(4, true);
             ChangeImage(5, true);
+            //Enviamos el voto.
+            SendVoto();
         });
 
         function ChangeImage(idImg, turnOn) {
@@ -149,21 +205,39 @@
             }
         }
 
-        function VoteHover(idImg) {
-            var str = $("#imgVote" + idImg).attr("src");
-            if ($("#imgVote" + idImg).attr("src").indexOf("voteOn") == -1) {
-                str = str.replace("Off", "On");
-            } else {
-                str = str.replace("On", "Off");
-            }
-            $("#imgVote" + idImg).attr("src", str);
+        function SendVoto() {
+            //Cogemos los datos a enviar.
+            var voto = parseFloat($("#hdnVote").val());
+            var url = "@Request.Url.AbsoluteUri";
+            $.ajax(
+            {
+                type: "POST",
+                data: "voto=" + voto + "&url=" + url,
+                url: "/Vote/",
+                success: function (data) {
+                    //Mostramos mensaje.
+                    $("#messageVote").fadeIn(2000);
+                    $("#messageVote").delay(2000);
+                    $("#messageVote").fadeOut();
+                    //Hacemos cambios en los votos.
+                    var arrayData = data.split("_");
+                    $("#lblMediaVotos").text(arrayData[0]);
+                    $("#lblTotalVotos").text(arrayData[1]);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                complete: function () {
+                }
+            });
         }
     });
 
 </script>
-<img id="imgVote1" class="link" title="1/5" src="@Url.Content("/Content/images/votes/voteOff_01.png")" width="20" height="31" alt="">
-<img id="imgVote2" class="link" style="position:relative; left: -4px;" title="2/5" src="@Url.Content("/Content/images/votes/voteOff_02.png")" width="20" height="31" alt="">
-<img id="imgVote3" class="link" style="position:relative; left: -8px;" title="3/5" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="">
-<img id="imgVote4" class="link" style="position:relative; left: -12px;" title="4/5" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="">
-<img id="imgVote5" class="link" style="position:relative; left: -16px;" title="5/5" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="">
-@Html.Hidden("hdnVote", 0)
+<img id="imgVote1" class="link" title="1/5" src="@Url.Content("/Content/images/votes/voteOff_01.png")" width="20" height="31" alt="" />
+<img id="imgVote2" class="link" style="position:relative; left: -4px;" title="2/5" src="@Url.Content("/Content/images/votes/voteOff_02.png")" width="20" height="31" alt="" />
+<img id="imgVote3" class="link" style="position:relative; left: -8px;" title="3/5" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="" />
+<img id="imgVote4" class="link" style="position:relative; left: -12px;" title="4/5" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="" />
+<img id="imgVote5" class="link" style="position:relative; left: -16px;" title="5/5" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+@Html.Hidden("hdnVote", ViewData["VotoActual"])

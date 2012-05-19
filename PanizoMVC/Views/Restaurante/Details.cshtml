@@ -36,13 +36,15 @@
                 <div style="float: left; width: 50%">
                     Nota Media (0 - 5):<br />
                     <span style="font-size: 20pt; font-weight: bold;">
+                        <label id="lblMediaVotos">
                         @if (ViewBag.TotalVotosRestaurante == 0)
                         {
                             @: -
                         }else{
                             @ViewBag.VotosRestaurante
                         }
-                    </span>(@ViewBag.TotalVotosRestaurante votos)
+                        </label>
+                    </span>(<label id="lblTotalVotos">@ViewBag.TotalVotosRestaurante</label> votos)
                 </div>
             </div>
         </fieldset>
