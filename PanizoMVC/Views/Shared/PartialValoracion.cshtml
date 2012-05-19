@@ -1,0 +1,56 @@
+@model List<PanizoMVC.VotosRestaurante>
+@if (Model.Count == 0)
+{
+    <img title="Sin votos" src="@Url.Content("/Content/images/votes/voteOff_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="Sin votos" src="@Url.Content("/Content/images/votes/voteOff_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="Sin votos" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="Sin votos" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="Sin votos" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+}
+else
+{
+    decimal sumaVotos = 0;
+    Model.ForEach(g => sumaVotos += g.Voto);
+    decimal media = Math.Round((sumaVotos / Model.Count), 2);
+    //El resto de imagenes posibles.
+    if (media <= 1)
+    {
+    <img title="@media" src="@Url.Content("/Content/images/votes/voteOn_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+    }
+    else if (media <= 2)
+    {
+    <img title="@media" src="@Url.Content("/Content/images/votes/voteOn_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+    }
+    else if (media <= 3)
+    {
+    <img title="@media" src="@Url.Content("/Content/images/votes/voteOn_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+    }
+    else if (media <= 4)
+    {
+    <img title="@media" src="@Url.Content("/Content/images/votes/voteOn_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="@media" src="@Url.Content("/Content/images/votes/voteOff_05.png")" width="20" height="31" alt="" />
+    }
+    else if (media <= 5)
+    {
+    <img title="@media" src="@Url.Content("/Content/images/votes/voteOn_01.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -4px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_02.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -8px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_03.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -12px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_04.png")" width="20" height="31" alt="" />
+    <img style="position:relative; left: -16px;" title="@media" src="@Url.Content("/Content/images/votes/voteOn_05.png")" width="20" height="31" alt="" />
+    }
+}
