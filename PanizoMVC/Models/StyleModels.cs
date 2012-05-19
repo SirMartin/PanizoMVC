@@ -60,4 +60,22 @@ namespace PanizoMVC.Models
     };
 
     #endregion
+
+    #region Los + valorados
+
+    public class ValoracionRestaurante
+    {
+        public decimal valoracion { get; set; }
+
+        public Restaurante restaurante { get; set; }
+    }
+
+    public class ValoracionBocadillo
+    {
+        public decimal valoracion { get; set; }
+
+        public Bocadillo bocadillo { get; set; }
+    }
+
+    #endregion
 }
