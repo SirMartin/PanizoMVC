@@ -236,7 +236,16 @@ namespace PanizoMVC.Controllers
         public ActionResult Todos()
         {
             //Recogemos todos los restaurantes.
-            List<Restaurante> restaurantes = db.Restaurantes.ToList();
+            List<Restaurante> restaurantes;
+            int? idCiudadFilter = IdCiudad;
+            if (idCiudadFilter == null)
+            {
+                restaurantes = db.Restaurantes.ToList();
+            }
+            else
+            {
+                restaurantes = db.Restaurantes.Where(g => g.IdCiudad == idCiudadFilter.Value).ToList();
+            }
 
             //Los pasamos como modelo.
             ViewData.Model = restaurantes;
@@ -252,7 +261,16 @@ namespace PanizoMVC.Controllers
         public ActionResult Ultimos()
         {
             //Recogemos los 20 restaurantes mas nuevos.
-            List<Restaurante> restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+            List<Restaurante> restaurantes;
+            int? idCiudadFilter = IdCiudad;
+            if (idCiudadFilter == null)
+            {
+                restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+            }
+            else
+            {
+                restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").Where(g => g.IdCiudad == idCiudadFilter.Value).OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+            }
 
             //Los pasamos como modelo.
             ViewData.Model = restaurantes;
@@ -268,7 +286,16 @@ namespace PanizoMVC.Controllers
         public ActionResult Valorados()
         {
             //Recogemos los restaurantes.
-            List<Restaurante> restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").ToList();
+            List<Restaurante> restaurantes;
+            int? idCiudadFilter = IdCiudad;
+            if (idCiudadFilter == null)
+            {
+                restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").ToList();
+            }
+            else
+            {
+                restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").Where(g => g.IdCiudad == idCiudadFilter.Value).ToList();
+            }
 
             //Los pasamos a la nueva entidad.
             List<ValoracionRestaurante> listaValores = new List<ValoracionRestaurante>();
