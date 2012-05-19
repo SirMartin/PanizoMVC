@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PanizoMVC.Restaurante>
+﻿@model IEnumerable<PanizoMVC.Models.ValoracionRestaurante>
 @{
     ViewBag.Title = "Todos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,29 +30,29 @@
     {
         <tr>
             <td align="center">
-                @Html.ActionLink(item.Ciudad.Nombre, "Details", new { id = item.Id })
+                @Html.ActionLink(item.restaurante.Ciudad.Nombre, "Details", new { id = item.restaurante.Id })
             </td>
             <td align="center">
-                @Html.ActionLink(item.Nombre, "Details", new { id = item.Id })
+                @Html.ActionLink(item.restaurante.Nombre, "Details", new { id = item.restaurante.Id })
             </td>
             <td align="center">
-                @Html.ActionLink(item.Direccion, "Details", new { id = item.Id })
+                @Html.ActionLink(item.restaurante.Direccion, "Details", new { id = item.restaurante.Id })
             </td>
             <td align="center">
                 @{
-                    String descripcion = item.Descripcion;
-                    if (item.Descripcion.Length > 150)
+                    String descripcion = item.restaurante.Descripcion;
+                    if (item.restaurante.Descripcion.Length > 150)
                     {
-                        descripcion = item.Descripcion.Substring(0, 150) + " ...";
+                        descripcion = item.restaurante.Descripcion.Substring(0, 150) + " ...";
                     }
                 }
-                @Html.ActionLink(descripcion, "Details", new { id = item.Id })
+                @Html.ActionLink(descripcion, "Details", new { id = item.restaurante.Id })
             </td>
             <td align="center">
-                @Html.ActionLink(item.FechaCreacion.ToString("dd/MM/yy HH:mm"), "Details", new { id = item.Id })
+                @Html.ActionLink(item.restaurante.FechaCreacion.ToString("dd/MM/yy HH:mm"), "Details", new { id = item.restaurante.Id })
             </td>
             <td align="center">
-                @Html.Partial("PartialValoracion", item.VotosRestaurante.ToList())
+                @Html.Partial("PartialValoracion", item.restaurante.VotosRestaurante.ToList())
             </td>
         </tr>
     }

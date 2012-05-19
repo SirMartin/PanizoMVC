@@ -936,6 +936,8 @@
     <Content Include="Views\Shared\PartialIngredientes.cshtml" />
     <Content Include="Views\Shared\PartialMessages.cshtml" />
     <Content Include="Views\Shared\PartialVotes.cshtml" />
+    <Content Include="Views\Shared\PartialValoracion.cshtml" />
+    <Content Include="Views\Restaurante\Valorados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Mensajes.resx">

@@ -252,10 +252,48 @@ namespace PanizoMVC.Controllers
         public ActionResult Ultimos()
         {
             //Recogemos los 20 restaurantes mas nuevos.
-            List<Restaurante> restaurantes = db.Restaurantes.OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
+            List<Restaurante> restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").OrderByDescending(g => g.FechaCreacion).Take(20).ToList();
 
             //Los pasamos como modelo.
             ViewData.Model = restaurantes;
+
+            //Pasamos a la vista.
+            return View();
+        }
+
+        #endregion
+
+        #region Mas Valorados
+
+        public ActionResult Valorados()
+        {
+            //Recogemos los restaurantes.
+            List<Restaurante> restaurantes = db.Restaurantes.Include("Ciudad").Include("VotosRestaurante").ToList();
+
+            //Los pasamos a la nueva entidad.
+            List<ValoracionRestaurante> listaValores = new List<ValoracionRestaurante>();
+            foreach (Restaurante item in restaurantes)
+            {
+                ValoracionRestaurante valor = new ValoracionRestaurante()
+                {
+                    restaurante = item
+                };
+                if (item.VotosRestaurante.Count > 0)
+                {
+                    int sumavotos = 0;
+                    item.VotosRestaurante.ToList().ForEach(g => sumavotos += g.Voto);
+                    valor.valoracion = sumavotos / item.VotosRestaurante.Count;
+                }
+                else
+                {
+                    valor.valoracion = 0;
+                }
+
+                listaValores.Add(valor);
+            }
+
+            //Los pasamos como modelo.
+            ViewData.Model = listaValores.OrderByDescending(g => g.valoracion).ToList();
 
             //Pasamos a la vista.
             return View();
@@ -291,8 +329,8 @@ namespace PanizoMVC.Controllers
                 TextoAbajo = "Ver los mas valorados",
                 //Action = "Valorados",
                 //Controller = "Restaurante"
-                Action = "Index",
-                Controller = "AdminRestaurante"
+                Action = "Valorados",
+                Controller = "Restaurante"
             };
 
             columns.Add(col2);
