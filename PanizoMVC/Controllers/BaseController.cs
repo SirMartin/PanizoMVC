@@ -24,6 +24,29 @@ namespace PanizoMVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Nos da el idciudad, si hemos elegido alguna por subdominio.
+        /// Si no será null.
+        /// </summary>
+        public int? IdCiudad
+        {
+            get
+            {
+                int? idCiudad = null;
+                String server = Request.ServerVariables["SERVER_NAME"];
+                if (!server.Equals("localhost"))
+                {
+                    String nombreCiudad = server.Remove(server.IndexOf(".entrepan.net"));
+                    Ciudad ciudad = db.Ciudades.Where(g => g.Nombre.ToLower().Equals(nombreCiudad.ToLower())).FirstOrDefault();
+                    if (ciudad != null)
+                    {
+                        idCiudad = ciudad.Id;
+                    }
+                }
+                return idCiudad;
+            }
+        }
+
         #endregion
 
         #region Para controlar si cumple los permisos.
