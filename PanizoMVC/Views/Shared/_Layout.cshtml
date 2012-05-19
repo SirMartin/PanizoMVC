@@ -88,13 +88,14 @@
             <a href="/">
                 <img id="logo" src="@Url.Content("~/Content/style/logopan.png")" alt="Entrepan.net" /></a>
             <a id="logotexto" href="/">
-                @{String txtUrl = Request.Url.AbsoluteUri.ToUpper().Replace("HTTP://", "").Replace("WWW.", "").Replace(":50649", "");
+                @*@{String txtUrl = Request.Url.AbsoluteUri.ToUpper().Replace("HTTP://", "").Replace("WWW.", "").Replace(":50649", "");
                     if (txtUrl.EndsWith("/"))
                     {
                         txtUrl = txtUrl.Remove(txtUrl.Length - 1);
                     }
                 }
-                @txtUrl
+                @txtUrl*@
+                @Request.ServerVariables["SERVER_NAME"].ToUpper()
             </a>
             <!-- Social -->
             <div id="social-holder">
