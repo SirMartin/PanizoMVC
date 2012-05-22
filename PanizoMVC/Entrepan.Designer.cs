@@ -28,6 +28,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DB_37268_panizoModel", "FK_VotosRestaurante_Restaurante", "Restaurante", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PanizoMVC.Restaurante), "VotosRestaurante", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PanizoMVC.VotosRestaurante), true)]
 [assembly: EdmRelationshipAttribute("DB_37268_panizoModel", "FK_VotosBocadillo_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PanizoMVC.Usuario), "VotosBocadillo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PanizoMVC.VotosBocadillo), true)]
 [assembly: EdmRelationshipAttribute("DB_37268_panizoModel", "FK_VotosRestaurante_Usuario", "Usuario", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PanizoMVC.Usuario), "VotosRestaurante", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PanizoMVC.VotosRestaurante), true)]
+[assembly: EdmRelationshipAttribute("DB_37268_panizoModel", "FK_Images_Bocadillo", "Bocadillo", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PanizoMVC.Bocadillo), "Images", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PanizoMVC.Images), true)]
+[assembly: EdmRelationshipAttribute("DB_37268_panizoModel", "FK_Images_Restaurante", "Restaurante", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PanizoMVC.Restaurante), "Images", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PanizoMVC.Images), true)]
 
 #endregion
 
@@ -206,6 +208,22 @@ namespace PanizoMVC
             }
         }
         private ObjectSet<VotosRestaurante> _VotosRestaurantes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Images> Images
+        {
+            get
+            {
+                if ((_Images == null))
+                {
+                    _Images = base.CreateObjectSet<Images>("Images");
+                }
+                return _Images;
+            }
+        }
+        private ObjectSet<Images> _Images;
 
         #endregion
         #region AddTo Methods
@@ -272,6 +290,14 @@ namespace PanizoMVC
         public void AddToVotosRestaurantes(VotosRestaurante votosRestaurante)
         {
             base.AddObject("VotosRestaurantes", votosRestaurante);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Images EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToImages(Images images)
+        {
+            base.AddObject("Images", images);
         }
 
         #endregion
@@ -545,6 +571,28 @@ namespace PanizoMVC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VotosBocadillo>("DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo", "VotosBocadillo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DB_37268_panizoModel", "FK_Images_Bocadillo", "Images")]
+        public EntityCollection<Images> Images
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Images>("DB_37268_panizoModel.FK_Images_Bocadillo", "Images");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Images>("DB_37268_panizoModel.FK_Images_Bocadillo", "Images", value);
                 }
             }
         }
@@ -901,6 +949,264 @@ namespace PanizoMVC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Restaurante>("DB_37268_panizoModel.FK_Restaurante_Ciudad", "Restaurante", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DB_37268_panizoModel", Name="Images")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Images : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Images object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="url">Initial value of the Url property.</param>
+        /// <param name="fechaAdded">Initial value of the FechaAdded property.</param>
+        public static Images CreateImages(global::System.Int32 id, global::System.String url, global::System.DateTime fechaAdded)
+        {
+            Images images = new Images();
+            images.Id = id;
+            images.Url = url;
+            images.FechaAdded = fechaAdded;
+            return images;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdBocadillo
+        {
+            get
+            {
+                return _IdBocadillo;
+            }
+            set
+            {
+                OnIdBocadilloChanging(value);
+                ReportPropertyChanging("IdBocadillo");
+                _IdBocadillo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdBocadillo");
+                OnIdBocadilloChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdBocadillo;
+        partial void OnIdBocadilloChanging(Nullable<global::System.Int32> value);
+        partial void OnIdBocadilloChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> IdRestaurante
+        {
+            get
+            {
+                return _IdRestaurante;
+            }
+            set
+            {
+                OnIdRestauranteChanging(value);
+                ReportPropertyChanging("IdRestaurante");
+                _IdRestaurante = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IdRestaurante");
+                OnIdRestauranteChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _IdRestaurante;
+        partial void OnIdRestauranteChanging(Nullable<global::System.Int32> value);
+        partial void OnIdRestauranteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Url
+        {
+            get
+            {
+                return _Url;
+            }
+            set
+            {
+                OnUrlChanging(value);
+                ReportPropertyChanging("Url");
+                _Url = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Url");
+                OnUrlChanged();
+            }
+        }
+        private global::System.String _Url;
+        partial void OnUrlChanging(global::System.String value);
+        partial void OnUrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Descripcion
+        {
+            get
+            {
+                return _Descripcion;
+            }
+            set
+            {
+                OnDescripcionChanging(value);
+                ReportPropertyChanging("Descripcion");
+                _Descripcion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Descripcion");
+                OnDescripcionChanged();
+            }
+        }
+        private global::System.String _Descripcion;
+        partial void OnDescripcionChanging(global::System.String value);
+        partial void OnDescripcionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime FechaAdded
+        {
+            get
+            {
+                return _FechaAdded;
+            }
+            set
+            {
+                OnFechaAddedChanging(value);
+                ReportPropertyChanging("FechaAdded");
+                _FechaAdded = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FechaAdded");
+                OnFechaAddedChanged();
+            }
+        }
+        private global::System.DateTime _FechaAdded;
+        partial void OnFechaAddedChanging(global::System.DateTime value);
+        partial void OnFechaAddedChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DB_37268_panizoModel", "FK_Images_Bocadillo", "Bocadillo")]
+        public Bocadillo Bocadillo
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bocadillo>("DB_37268_panizoModel.FK_Images_Bocadillo", "Bocadillo").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bocadillo>("DB_37268_panizoModel.FK_Images_Bocadillo", "Bocadillo").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Bocadillo> BocadilloReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bocadillo>("DB_37268_panizoModel.FK_Images_Bocadillo", "Bocadillo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Bocadillo>("DB_37268_panizoModel.FK_Images_Bocadillo", "Bocadillo", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DB_37268_panizoModel", "FK_Images_Restaurante", "Restaurante")]
+        public Restaurante Restaurante
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Restaurante>("DB_37268_panizoModel.FK_Images_Restaurante", "Restaurante").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Restaurante>("DB_37268_panizoModel.FK_Images_Restaurante", "Restaurante").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Restaurante> RestauranteReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Restaurante>("DB_37268_panizoModel.FK_Images_Restaurante", "Restaurante");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Restaurante>("DB_37268_panizoModel.FK_Images_Restaurante", "Restaurante", value);
                 }
             }
         }
@@ -1489,6 +1795,28 @@ namespace PanizoMVC
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<VotosRestaurante>("DB_37268_panizoModel.FK_VotosRestaurante_Restaurante", "VotosRestaurante", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DB_37268_panizoModel", "FK_Images_Restaurante", "Images")]
+        public EntityCollection<Images> Images
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Images>("DB_37268_panizoModel.FK_Images_Restaurante", "Images");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Images>("DB_37268_panizoModel.FK_Images_Restaurante", "Images", value);
                 }
             }
         }

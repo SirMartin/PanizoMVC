@@ -9,6 +9,7 @@
           <EntitySet Name="Bocadillo" EntityType="DB_37268_panizoModel.Store.Bocadillo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BocadilloIngrediente" EntityType="DB_37268_panizoModel.Store.BocadilloIngrediente" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Ciudad" EntityType="DB_37268_panizoModel.Store.Ciudad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Images" EntityType="DB_37268_panizoModel.Store.Images" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Ingrediente" EntityType="DB_37268_panizoModel.Store.Ingrediente" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Restaurante" EntityType="DB_37268_panizoModel.Store.Restaurante" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Usuario" EntityType="DB_37268_panizoModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
@@ -29,6 +30,14 @@
           <AssociationSet Name="FK_BocadilloIngrediente_Usuario" Association="DB_37268_panizoModel.Store.FK_BocadilloIngrediente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="BocadilloIngrediente" EntitySet="BocadilloIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Bocadillo" Association="DB_37268_panizoModel.Store.FK_Images_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillo" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Restaurante" Association="DB_37268_panizoModel.Store.FK_Images_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="Images" EntitySet="Images" />
           </AssociationSet>
           <AssociationSet Name="FK_Ingrediente_Usuario" Association="DB_37268_panizoModel.Store.FK_Ingrediente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -81,6 +90,17 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdBocadillo" Type="int" />
+          <Property Name="IdRestaurante" Type="int" />
+          <Property Name="Url" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="FechaAdded" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Ingrediente">
           <Key>
@@ -189,6 +209,30 @@
             </Principal>
             <Dependent Role="BocadilloIngrediente">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Bocadillo">
+          <End Role="Bocadillo" Type="DB_37268_panizoModel.Store.Bocadillo" Multiplicity="0..1" />
+          <End Role="Images" Type="DB_37268_panizoModel.Store.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Restaurante">
+          <End Role="Restaurante" Type="DB_37268_panizoModel.Store.Restaurante" Multiplicity="0..1" />
+          <End Role="Images" Type="DB_37268_panizoModel.Store.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdRestaurante" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,6 +361,15 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="VotosRestaurante" EntitySet="VotosRestaurantes" />
           </AssociationSet>
+          <EntitySet Name="Images" EntityType="DB_37268_panizoModel.Images" />
+          <AssociationSet Name="FK_Images_Bocadillo" Association="DB_37268_panizoModel.FK_Images_Bocadillo">
+            <End Role="Bocadillo" EntitySet="Bocadillos" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Restaurante" Association="DB_37268_panizoModel.FK_Images_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bocadillo">
           <Key>
@@ -331,6 +384,7 @@
           <NavigationProperty Name="Restaurante" Relationship="DB_37268_panizoModel.FK_Bocadillo_Restaurante" FromRole="Bocadillo" ToRole="Restaurante" />
           <NavigationProperty Name="BocadilloIngrediente" Relationship="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo" FromRole="Bocadillo" ToRole="BocadilloIngrediente" />
           <NavigationProperty Name="VotosBocadillo" Relationship="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo" FromRole="Bocadillo" ToRole="VotosBocadillo" />
+          <NavigationProperty Name="Images" Relationship="DB_37268_panizoModel.FK_Images_Bocadillo" FromRole="Bocadillo" ToRole="Images" />
         </EntityType>
         <EntityType Name="BocadilloIngrediente">
           <Key>
@@ -381,6 +435,7 @@
           <NavigationProperty Name="VotosRestaurante" Relationship="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" FromRole="Restaurante" ToRole="VotosRestaurante" />
           <Property Type="String" Name="Web" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Images" Relationship="DB_37268_panizoModel.FK_Images_Restaurante" FromRole="Restaurante" ToRole="Images" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -547,6 +602,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdBocadillo" />
+          <Property Type="Int32" Name="IdRestaurante" />
+          <Property Type="String" Name="Url" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaAdded" Nullable="false" />
+          <NavigationProperty Name="Bocadillo" Relationship="DB_37268_panizoModel.FK_Images_Bocadillo" FromRole="Images" ToRole="Bocadillo" />
+          <NavigationProperty Name="Restaurante" Relationship="DB_37268_panizoModel.FK_Images_Restaurante" FromRole="Images" ToRole="Restaurante" />
+        </EntityType>
+        <Association Name="FK_Images_Bocadillo">
+          <End Type="DB_37268_panizoModel.Bocadillo" Role="Bocadillo" Multiplicity="0..1" />
+          <End Type="DB_37268_panizoModel.Images" Role="Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bocadillo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdBocadillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Restaurante">
+          <End Type="DB_37268_panizoModel.Restaurante" Role="Restaurante" Multiplicity="0..1" />
+          <End Type="DB_37268_panizoModel.Images" Role="Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -618,6 +710,18 @@
             <ScalarProperty Name="Comentario" ColumnName="Comentario" />
             <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="DB_37268_panizoModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="FechaAdded" ColumnName="FechaAdded" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+                <ScalarProperty Name="IdBocadillo" ColumnName="IdBocadillo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -648,22 +752,22 @@
         <EntityTypeShape EntityType="DB_37268_panizoModel.VotosBocadillo" Width="1.5" PointX="3" PointY="5.25" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_37268_panizoModel.VotosRestaurante" Width="1.5" PointX="6" PointY="4.25" Height="2.5571907552083317" IsExpanded="true" />
         <AssociationConnector Association="DB_37268_panizoModel.FK_Bocadillo_Restaurante" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.875" PointY="4.0090950520833335" />
-          <ConnectorPoint PointX="4.875" PointY="12.338440755208334" />
-          <ConnectorPoint PointX="2.25" PointY="12.338440755208334" />
+          <ConnectorPoint PointX="4.875" PointY="4.5859993489583326" />
+          <ConnectorPoint PointX="4.875" PointY="12.603094163674907" />
+          <ConnectorPoint PointX="2.25" PointY="12.603094163674907" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Bocadillo" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="12.0391625390625" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="12.0391625390625" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="12.0391625390625" />
-          <ConnectorPoint PointX="6" PointY="12.0391625390625" />
+          <ConnectorPoint PointX="2.25" PointY="12.171489243295788" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="12.171489243295788" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="12.171489243295788" />
+          <ConnectorPoint PointX="6" PointY="12.171489243295788" />
           <ConnectorPoint PointX="6" PointY="10.114889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_VotosBocadillo_Bocadillo" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="10.126152846153847" />
           <ConnectorPoint PointX="2.625" PointY="9.7511528461538468" />
-          <ConnectorPoint PointX="2.625" PointY="6.5285953776041659" />
-          <ConnectorPoint PointX="3" PointY="6.5285953776041659" />
+          <ConnectorPoint PointX="2.625" PointY="6.1290318221028635" />
+          <ConnectorPoint PointX="3" PointY="6.1290318221028635" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Ingrediente" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="9.7449446614583337" />
@@ -672,42 +776,50 @@
           <ConnectorPoint PointX="5.25" PointY="9.7449446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_BocadilloIngrediente_Usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.3720914713541656" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="8.3720914713541656" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="8.3720914713541656" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="8.3720914713541656" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="8.3720914713541656" />
-          <ConnectorPoint PointX="5.25" PointY="8.3720914713541656" />
+          <ConnectorPoint PointX="2.25" PointY="8.5391666303119536" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="8.5391666303119536" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="8.5391666303119536" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="8.5391666303119536" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="8.5391666303119536" />
+          <ConnectorPoint PointX="5.25" PointY="8.5391666303119536" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_Restaurante_Ciudad" ManuallyRouted="false">
           <ConnectorPoint PointX="3" PointY="2.422841796875" />
           <ConnectorPoint PointX="3.75" PointY="2.422841796875" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_Ingrediente_Usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="8.8121834951923077" />
-          <ConnectorPoint PointX="2.5660744349011213" PointY="9.1282579300934277" />
-          <ConnectorPoint PointX="2.6839255650988791" PointY="9.246109060291186" />
-          <ConnectorPoint PointX="2.8125" PointY="9.3746834951923077" />
-          <ConnectorPoint PointX="2.8125" PointY="9.1863471538461532" />
-          <ConnectorPoint PointX="3.0011528461538459" PointY="9.375" />
+          <ConnectorPoint PointX="2.25" PointY="9.6054996744791659" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="9.6054996744791659" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="9.6054996744791659" />
+          <ConnectorPoint PointX="3" PointY="9.6054996744791659" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_VotosRestaurante_Restaurante" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.25" PointY="2.4420475260416667" />
-          <ConnectorPoint PointX="6.75" PointY="2.4420475260416667" />
-          <ConnectorPoint PointX="6.75" PointY="4.25" />
+          <ConnectorPoint PointX="5.25" PointY="4.4179996744791659" />
+          <ConnectorPoint PointX="6" PointY="4.4179996744791659" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_VotosBocadillo_Usuario" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="7.2303930664062488" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="7.2303930664062479" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="7.2303930664062488" />
-          <ConnectorPoint PointX="3" PointY="7.2303930664062488" />
+          <ConnectorPoint PointX="2.25" PointY="7.0705676442057275" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.0705676442057266" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.0705676442057275" />
+          <ConnectorPoint PointX="3" PointY="7.0705676442057275" />
         </AssociationConnector>
         <AssociationConnector Association="DB_37268_panizoModel.FK_VotosRestaurante_Usuario" ManuallyRouted="false">
           <ConnectorPoint PointX="1.5" PointY="6.125" />
-          <ConnectorPoint PointX="1.5" PointY="4.71875" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="4.7187499999999991" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="4.71875" />
-          <ConnectorPoint PointX="6" PointY="4.71875" />
+          <ConnectorPoint PointX="1.5" PointY="4.8218489583333328" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="4.8218489583333319" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="4.8218489583333328" />
+          <ConnectorPoint PointX="6" PointY="4.8218489583333328" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="DB_37268_panizoModel.Images" Width="1.5" PointX="8" PointY="7.75" Height="2.5571907552083317" />
+        <AssociationConnector Association="DB_37268_panizoModel.FK_Images_Bocadillo" >
+          <ConnectorPoint PointX="2.25" PointY="12.866196391733286" />
+          <ConnectorPoint PointX="8.75" PointY="12.866196391733286" />
+          <ConnectorPoint PointX="8.75" PointY="10.307190755208332" />
+        </AssociationConnector>
+        <AssociationConnector Association="DB_37268_panizoModel.FK_Images_Restaurante" >
+          <ConnectorPoint PointX="5.25" PointY="2.53125" />
+          <ConnectorPoint PointX="8.75" PointY="2.53125" />
+          <ConnectorPoint PointX="8.75" PointY="7.75" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
